@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "name": "Scytodes",
+    "version": "1.0.0",
+    "url": ""
+  },
+  "items": {
+    "Scytodes:the_item_in_question": {
+      "name": "The Item In Question",
+      "notes": "This is a test passive item."
+    },
+    "Scytodes:the_gun_in_question": {
+      "name": "The Gun In Question",
+      "notes": "This is a test gun."
+    },
+  },
+  "synergies": {
+    "#SCYTO'S_BIAS": {
+      "name": "Scyto's Bias",
+      "notes": "WE LIVE BY THE SWORD!! Significantly increases the damage boost from The Item In Question"
+    },
+  }
+}
