@@ -64,6 +64,12 @@ namespace Scytodes.passive_items
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Coolness, 5);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
+            /* Adds curse to the player when buying/picking up this item.
+             * The last parameter in this line defines the amount of curse the player receives.
+             * Set the last parameter to 0f if you do not want this item to give you curse.
+             * Remember that the 'f' after the number marks it as a "float" value. Make sure to include the 'f' as AddPassiveStatModifier takes float values. */
+            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 4f);
+
             /* Sets the rarity of this item.
              * You cannot have a standard quality AND have special, excluded, or common quality at the same time!
              * However, remember that you MUST have a quality set so make sure to pick either a standard quality or special/excluded/common!
@@ -119,7 +125,8 @@ namespace Scytodes.passive_items
             /* Trorc is the one that primarily sells miliary styled/related items. */
             //itemComponent.AddToSubShop(ItemBuilder.ShopType.Trorc);
             /* Cursula is the one that sells cursed items. 
-             * Any item bought from her gives an additional 2.5 curse, even if it doesn't give curse normally. */
+             * Any item bought from her gives an additional 2.5 curse on top of the default curse of the item, even if it doesn't give curse normally.
+             * If you steal from Cursula, however, it only adds 1 curse on top since stealing (from any shop) always gives 1 curse, and it bypasses the "purchasing" of the item. */
             //itemComponent.AddToSubShop(ItemBuilder.ShopType.Cursula);
 
             /* Lets this item have a custom buy price. */
