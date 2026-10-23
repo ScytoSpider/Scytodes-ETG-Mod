@@ -161,8 +161,9 @@ namespace Scytodes.passive_items
         /* Handles synergy logic.
          * For help regarding setting up synergies, use the following link.
          * https://mtgmodders.gitbook.io/etg-modding-guide/making-mods-setup/synergies
-         * Alternatively, you can head to the following github page and analyze the code there.
-         * https://github.com/Ricky2148/ETG-Mod-League-of-Legends-Items/blob/main/Synergies.cs
+         * Alternatively, you can head to either of the following 2 github pages and analyze the code there.
+         * https://github.com/ScytoSpider/Scytodes-ETG-Mod/blob/master/ScytodesSynergies.cs (this is my synergy class, adapted code)
+         * https://github.com/Ricky2148/ETG-Mod-League-of-Legends-Items/blob/main/Synergies.cs (this is Ricky2148's synergy class)
          * If you still need help, you can join the "Mod The Gungeon" discord server using the following link.
          * https://discord.gg/Ne9yh5Krsh */
         public override void Update()
