@@ -103,7 +103,7 @@ namespace Scytodes.passive_items
 
             /* Excludes this item from Bello's shop (normal shopkeeper).
              * Set this line to true if you don't want this item to be sold in Bello's shop.
-             * This is ignored if the item has SPECIAL or EXCLUDED quality */
+             * This is ignored if this item has SPECIAL or EXCLUDED quality */
             item.ShouldBeExcludedFromShops = false;
 
             /* Adds this item to specific special shops. These accept any quality EXCEPT special & excluded (idk if this works for COMMON items)!
