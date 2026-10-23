@@ -97,7 +97,8 @@ namespace Scytodes.passive_items
             item.IgnoredByRat = false;
 
             /* Stops this item from being picked up by the Resourceful Rat if you DROP it and leave the room.
-             * This is ignored if IgnoredByRat is false. */
+             * This is ignored if IgnoredByRat is false. 
+             * Set this line to true to make him ignore this item after DROPPING it. */
             item.ClearIgnoredByRatFlagOnPickup = false;
 
             /* Excludes this item from Bello's shop (normal shopkeeper).
