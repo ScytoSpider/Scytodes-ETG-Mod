@@ -78,7 +78,8 @@ namespace Scytodes.passive_items
             item.ItemSpansBaseQualityTiers = true;
 
             /* Hides this item from the ammonomicon.
-             * Set this line to true if you don't want this item to appear in the ammonomicon. */
+             * Set this line to true if you don't want this item to appear in the ammonomicon. 
+             * This is ignored if this item's quality is EXCLUDED. */
             item.encounterTrackable.journalData.SuppressInAmmonomicon = false;
 
             /* Hides this item from the player's inventory ammonomicon.
