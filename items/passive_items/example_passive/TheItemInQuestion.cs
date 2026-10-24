@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using Scytodes;
 
 /* MASSIVE THANKS TO RICKY2148 IN THE "Mod The Gungeon" DISCORD SERVER 
  * ALSO MASSIVE THANKS TO REALMSXMYTHS & CAPTAIN PRETZEL IN THE SAME DISCORD SERVER
@@ -48,15 +49,17 @@ namespace Scytodes.passive_items
              * shortDesc should be one sentence max. Usually only one or a few words.
              * longDesc is your entire item description. Describe exactly what your item does and include flavor text at the top or bottom if you want. */
             string shortDesc = "This is a test passive item.";
-            string longDesc = "This is a test passive item that I, the great ScytodesThoracica has made!!\n\n" + "If you have this then I've done something wrong!";
+            string longDesc = "Strong emotions from this item's previous bearer still linger inside.\n" + "These emotions may empower you when in possession of the previous bearer's favorite sword...\n\n" + "If you have this item, something terrible has happened.";
 
             /* Adds this item to the gungeon item list, ammonomicon, loot table, etc.
              * This line should always come AFTER ItemBuilder.AddSpriteToObject()!
              * The last parameter in this line defines your "prefix" when spawning this item in-game through the f2 console.
              * The following is the command used to spawn an item in-game: give <prefix>:<all lowercase item name but spaces are underscores>
              * <prefix>:<all lowercase item name but spaces are underscores> is also how you define an item for the ItemTips mod. Use the following link for more info on the ItemTips mod.
-             * https://thunderstore.io/c/enter-the-gungeon/p/Glorfindel/ItemTips/ */
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "Scytodes");
+             * https://thunderstore.io/c/enter-the-gungeon/p/Glorfindel/ItemTips/
+             * Note: Your prefix should be the same all across your project! Everywhere you need to input a prefix, use the same exact one.
+             * This class should be set up where you do not need to touch this line. However, if you did not define your prefix in your "Plugin" class, go do that! Otherwise you will have to modify this line. */
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, $"{Plugin.ModPrefix}");
 
             /* Adds the actual passive effect to this item.
              * Depending on what you want your item to do, you may or may not want to delete this part. */
@@ -76,7 +79,7 @@ namespace Scytodes.passive_items
              * Standard qualities include D, C, B, A, and S.
              * COMMON quality allows items to spawn in D tier chests and as a room clear reward. This is also the same quality for hearts, armor, keys, and blanks (but not heart containers).
              * SPECIAL quality is used by Master Rounds, Junk, Lies, and other "specific method for obtaining" items. This quality stops items from spawning in-game normally (except MODDED shops which explicitly allow this item).
-             * EXCLUDED quality stops items from spawning in-game and hides it from the ammonomicon. Only use this quality for WIP items or other items you dont want players to have at any time in a run (note this doesnt stop the item from being spawned in using the f2 console). */
+             * EXCLUDED quality stops items from spawning in-game and hides it from the ammonomicon. Only use this quality for WIP items or other items you dont want players to have at any time in a run (note: this doesnt stop the item from being spawned in using the f2 console). */
             item.quality = PickupObject.ItemQuality.EXCLUDED;
 
             /* Lets this item spawn from C, B, and A tiers, not just its own quality.

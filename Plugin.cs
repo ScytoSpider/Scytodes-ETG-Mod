@@ -21,6 +21,14 @@ namespace Scytodes
         public const string VERSION = "1.0.0";
         public const string TEXT_COLOR = "#671090";
 
+        /* This line defines your "prefix" when spawning this item in-game through the f2 console.
+         * The following is the command used to spawn an item in-game: give <prefix>:<all lowercase item name but spaces are underscores>
+         * <prefix>:<all lowercase item name but spaces are underscores> is also how you define an item for the ItemTips mod. Use the following link for more info on the ItemTips mod.
+         * https://thunderstore.io/c/enter-the-gungeon/p/Glorfindel/ItemTips/
+         * Note: Your prefix should be the same all across your project! Everywhere you need to input a prefix, use the same exact one.
+         * However, this should be the only line in your project that you are defining your prefix, to reduce the chance of errors. */
+        public static string ModPrefix = "Scytodes";
+
         public void Start()
         {
             ETGModMainBehaviour.WaitForGameManagerStart(GMStart);
