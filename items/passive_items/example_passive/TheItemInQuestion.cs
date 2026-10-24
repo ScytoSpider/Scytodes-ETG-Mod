@@ -49,7 +49,7 @@ namespace Scytodes.passive_items
              * shortDesc should be one sentence max. Usually only one or a few words.
              * longDesc is your entire item description. Describe exactly what your item does and include flavor text at the top or bottom if you want. */
             string shortDesc = "This is a test passive item.";
-            string longDesc = "Strong emotions from this item's previous bearer still linger inside.\n" + "These emotions may empower you when in possession of the previous bearer's favorite sword...\n\n" + "If you have this item, something terrible has happened.";
+            string longDesc = "Strong emotions from this item's previous bearer still linger inside. These emotions may empower you when in possession of the previous bearer's favorite sword...\n\n" + "If you have this item, something terrible has happened.";
 
             /* Adds this item to the gungeon item list, ammonomicon, loot table, etc.
              * This line should always come AFTER ItemBuilder.AddSpriteToObject()!
@@ -65,7 +65,7 @@ namespace Scytodes.passive_items
              * Depending on what you want your item to do, you may or may not want to delete this part. */
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Health, 1, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Coolness, 5);
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.1f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
             /* Adds curse to the player when buying/picking up this item.
              * The last parameter in this line defines the amount of curse the player receives.
@@ -191,7 +191,7 @@ namespace Scytodes.passive_items
                 else if (!Owner.HasSynergy(Synergy.SCYTOS_BIAS) && SCYTOSBIASActivated)
                 {
                     ItemBuilder.RemovePassiveStatModifier(this, PlayerStats.StatType.Damage);
-                    ItemBuilder.AddPassiveStatModifier(this, PlayerStats.StatType.Damage, 1.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
+                    ItemBuilder.AddPassiveStatModifier(this, PlayerStats.StatType.Damage, 1.1f, StatModifier.ModifyMethod.MULTIPLICATIVE);
                     Owner.stats.RecalculateStatsWithoutRebuildingGunVolleys(Owner);
 
                     SCYTOSBIASActivated = false;

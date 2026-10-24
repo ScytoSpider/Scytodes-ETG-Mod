@@ -253,9 +253,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="items\active_items\example_active\" />
-    <Folder Include="sprites\Ammonomicon Encounter Icon Collection\" />
-    <Folder Include="sprites\ProjectileCollection\" />
-    <Folder Include="sprites\WeaponCollection\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\BepInEx.Core.5.4.21\build\BepInEx.Core.targets" Condition="Exists('packages\BepInEx.Core.5.4.21\build\BepInEx.Core.targets')" />

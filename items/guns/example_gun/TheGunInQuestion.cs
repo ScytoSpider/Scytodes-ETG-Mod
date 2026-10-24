@@ -1,14 +1,18 @@
-﻿using Alexandria.ItemAPI;
-using Gungeon;
-using Alexandria;
-using MonoMod;
-using System;
+﻿using System;
 using System.Collections;
+using Gungeon;
+using MonoMod;
 using UnityEngine;
+using Alexandria.ItemAPI;
+using Alexandria.SoundAPI;
+using Alexandria.BreakableAPI;
+using BepInEx;
+using System.Collections.Generic;
+using Scytodes;
 
 namespace Scytodes.guns
 {
-    internal class TheGunInQuestion : GunBehaviour
+    internal class TheGunInQuestion : AdvancedGunBehavior
     {
         public static int ID;
 
@@ -16,37 +20,38 @@ namespace Scytodes.guns
         {
             // Get yourself a new gun "base" first.
             // Let's just call it "Basic Gun", and use "jpxfrd" for all sprites and as "codename" All sprites must begin with the same word as the codename. For example, your firing sprite would be named "jpxfrd_fire_001".
-            Gun gun = ETGMod.Databases.Items.NewGun("The Gun In Question", "theguninquestion");
+            Gun baseGun = PickupObjectDatabase.GetById(89) as Gun;
+            Gun gun = ETGMod.Databases.Items.NewGun("The Gun In Question", baseGun, "theguninquestion");
             // "kp:basic_gun determines how you spawn in your gun through the console. You can change this command to whatever you want, as long as it follows the "name:itemname" template.
             Game.Items.Rename("outdated_gun_mods:the_gun_in_question", "Scytodes:the_gun_in_question");
             gun.gameObject.AddComponent<TheGunInQuestion>();
             //These two lines determines the description of your gun, ".SetShortDescription" being the description that appears when you pick up the gun and ".SetLongDescription" being the description in the Ammonomicon entry. 
             gun.SetShortDescription("This is a test gun.");
-            gun.SetLongDescription("This is a test gun that I, the great ScytodesThoracica has made!!\n\n" + "If you have this then I've done something wrong!");
+            gun.SetLongDescription("f.\n\n" + "If you have this item, something terrible has happened.");
             // This is required, unless you want to use the sprites of the base gun.
             // That, by default, is the pea shooter.
             // SetupSprite sets up the default gun sprite for the ammonomicon and the "gun get" popup.
             // WARNING: Add a copy of your default sprite to Ammonomicon Encounter Icon Collection!
             // That means, "sprites/Ammonomicon Encounter Icon Collection/defaultsprite.png" in your mod .zip. You can see an example of this with inside the mod folder.
-            //gun.SetupSprite(null, "heck_blaster", 8);
+            gun.SetupSprite(null, $"theguninquestion_idle_001", 8);
             // ETGMod automatically checks which animations are available.
             // The numbers next to "shootAnimation" determine the animation fps. You can also tweak the animation fps of the reload animation and idle animation using this method.
-            gun.SetAnimationFPS(gun.shootAnimation, 24);
-            gun.SetAnimationFPS(gun.reloadAnimation, 24);
+            gun.SetAnimationFPS(gun.shootAnimation, 18);
+            gun.SetAnimationFPS(gun.reloadAnimation, 18);
             // Every modded gun has base projectile it works with that is borrowed from other guns in the game. 
             // The gun names are the names from the JSON dump! While most are the same, some guns named completely different things. If you need help finding gun names, ask a modder on the Gungeon discord.
-            gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(59) as Gun, true, false);
+            gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(89) as Gun, true, false);
             // Here we just take the default projectile module and change its settings how we want it to be.
             gun.gunHandedness = GunHandedness.AutoDetect;
             gun.barrelOffset.localPosition = new Vector3(16 / 16f, 9 / 16f, 0f);
             gun.DefaultModule.ammoCost = 1;
-            gun.DefaultModule.angleVariance = 30f;
+            gun.DefaultModule.angleVariance = 20f;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 1.1f;
-            gun.DefaultModule.cooldownTime = 0.2f;
-            gun.DefaultModule.numberOfShotsInClip = 27;
-            //gun.SetBaseMaxAmmo(250);
+            gun.DefaultModule.cooldownTime = 0.25f;
+            gun.DefaultModule.numberOfShotsInClip = 12;
+            gun.SetBaseMaxAmmo(250);
             gun.InfiniteAmmo = true; //Gives a gun infinite ammo. By default infinite ammo guns can't crack walls leading to secret rooms.
             gun.CanGainAmmo = false; //Prevents a gun from being able to pick up ammo boxes.
             //gun.preventRotation = true; //Prevents the gun from rotating with aim direction -> will always face directly right or left.
@@ -59,7 +64,7 @@ namespace Scytodes.guns
 
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
-            //gun.encounterTrackable.EncounterGuid = "Basic Gun";
+            gun.encounterTrackable.EncounterGuid = "theguninquestion";
 
             //This block of code helps clone our projectile. Basically it makes it so things like Shadow Clone and Hip Holster keep the stats/sprite of your custom gun's projectiles.
 
@@ -75,7 +80,7 @@ namespace Scytodes.guns
 
             //You can modify a good number of stats but for now, let's just modify the damage and speed.
             projectile.baseData.damage = 5f;
-            projectile.baseData.speed = 50f;
+            //projectile.baseData.speed = 50f;
             projectile.transform.parent = gun.barrelOffset;
             //This determines what sprite you want your projectile to use. Note this isn't necessary if you don't want to have a custom projectile sprite.
             //The x and y values determine the size of your custom projectile
@@ -94,11 +99,10 @@ namespace Scytodes.guns
         }
         private bool HasReloaded;
         //This block of code allows us to change the reload sounds.
-        public override void Update()
+        protected override void Update()
         {
             if (gun.CurrentOwner)
             {
-
                 if (!gun.PreventNormalFireAudio)
                 {
                     this.gun.PreventNormalFireAudio = true;
