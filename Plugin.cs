@@ -36,24 +36,24 @@ namespace Scytodes
 
         public void GMStart(GameManager g)
         {
-            //Initialize all your passive items here
+            /* Initialize all your passive items here. */
             #region PassiveItems
             TheItemInQuestion.Init();
             //FillerName.Init();
             #endregion
 
-            //Initialize all your active items here
+            /* Initialize all your active items here. */
             #region ActiveItems
             //FillerName.Init();
             #endregion
 
-            //Initialize all your guns here
+            /* Initialize all your guns here. */
             #region Guns
             TheGunInQuestion.Add();
             //FillerName.Add();
             #endregion
 
-            //Synergies Init (You won't need more than just this line)
+            /* Synergies Init (You won't need more than just this line). */
             ScytodesSynergies.Init();
 
             Log($"{NAME} v{VERSION} started successfully. If any bugs occur with my mod, contact me at lethal_inc. on discord!", TEXT_COLOR);
