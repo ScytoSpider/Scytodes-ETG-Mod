@@ -74,17 +74,17 @@ namespace Scytodes
             /* Refillable Potion [EXAMPLE] */
             //NewSynergy(LOLItems.Synergy.COCKTAIL_POTION, "Cocktail Potion", new[] { IName(RefillablePotion.ItemName) }, new[] { "potion_of_lead_skin", "potion_of_gun_friendship" });
 
-            //Name Filler
+            /* Name Filler */
             //NewSynergy();
 
             /* ==============================================================================================================
              * GUN SYNERGIES
              * ============================================================================================================== */
 
-            //Virtue [EXAMPLE]
+            /* Virtue [EXAMPLE] */
             //NewSynergy(LOLItems.Synergy.EXP_SHARE_FORM_1, "EXP. Share", new[] { VirtueForm1.internalName }, new[] { "macho_brace", "scouter", "life_orb" });
 
-            //Name Filler
+            /* Name Filler */
             //NewSynergy();
 
             #endregion
