@@ -39,7 +39,7 @@ namespace Scytodes
         {
             /* The first parameter in this line should be the same as your "prefix" when spawning your item(s) in-game through the f2 console.
              * Note: Your prefix should be the same all across your project! Everywhere you need to input a prefix, use the same exact one.
-             * This class should be set up where you do not need to touch this line. However, if you did not define your prefix in your "Plugin" class, go do that! Otherwise you will have to modify this line. */
+             * This class should be set up where you do not need to touch this line. However, if you did not define your prefix in your "Plugin" class, go do that (static string)! Otherwise you will have to modify this line. */
             return ETGModCompatibility.ExtendEnum<T>($"{Plugin.ModPrefix.ToUpper()}", s);
         }
 
@@ -167,7 +167,7 @@ namespace Scytodes
 
         /* The string after the "IName() =>" in this line defines your "prefix" when spawning this item in-game through the f2 console.
          * Note: Your prefix should be the same all across your project! Everywhere you need to input a prefix, use the same exact one.
-         * This class should be set up where you do not need to touch this line. However, if you did not define your prefix in your "Plugin" class, go do that! Otherwise you will have to modify this line. */
+         * This class should be set up where you do not need to touch this line. However, if you did not define your prefix in your "Plugin" class, go do that (static string)! Otherwise you will have to modify this line. */
         private static string IName(string itemName) => $"{Plugin.ModPrefix}:" + itemName.ToID();
         public static CustomSynergyType Synergy(this Synergy synergy) => _Synergies[(int)synergy];
         public static string SynergyName(this Synergy synergy) => _SynergyNames[(int)synergy];

@@ -58,7 +58,7 @@ namespace Scytodes.passive_items
              * <prefix>:<all lowercase item name but spaces are underscores> is also how you define an item for the ItemTips mod. Use the following link for more info on the ItemTips mod.
              * https://thunderstore.io/c/enter-the-gungeon/p/Glorfindel/ItemTips/
              * Note: Your prefix should be the same all across your project! Everywhere you need to input a prefix, use the same exact one.
-             * This class should be set up where you do not need to touch this line. However, if you did not define your prefix in your "Plugin" class, go do that! Otherwise you will have to modify this line. */
+             * This class should be set up where you do not need to touch this line. However, if you did not define your prefix in your "Plugin" class, go do that (static string)! Otherwise you will have to modify this line. */
             ItemBuilder.SetupItem(item, shortDesc, longDesc, $"{Plugin.ModPrefix}");
 
             /* Adds the actual passive effect to this item.
