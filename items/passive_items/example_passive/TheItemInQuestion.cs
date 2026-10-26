@@ -34,7 +34,7 @@ namespace Scytodes.passive_items
              * Refers to an embedded png in the project. Make sure to embed your resources!
              * DO NOT include the ".png" or any other file extension in resourceName! Just the name of the file.
              * To embed your sprite: In Solution Explorer, Show all files > Find your png > Right click, include in project > Right click, Properties > Set Build Action to Embedded Resource. */
-            string resourceName = "Scytodes/Resources/the_item_in_question";
+            string resourceName = "Scytodes/Resources/passive_item_sprites/the_item_in_question";
 
             /* Create new GameObject. */
             GameObject obj = new GameObject(itemName);

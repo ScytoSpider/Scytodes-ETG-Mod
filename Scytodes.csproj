@@ -259,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <EmbeddedResource Include="Resources\passive_item_sprites\the_item_in_question.png" />
     <Content Include="Resources\Sounds\README.txt" />
     <EmbeddedResource Include="Resources\sprites\Ammonomicon Encounter Icon Collection\theguninquestion_idle_001.png" />
     <EmbeddedResource Include="Resources\sprites\WeaponCollection\theguninquestion_fire_001.png" />
@@ -277,10 +278,8 @@
     <EmbeddedResource Include="Resources\sprites\WeaponCollection\theguninquestion_reload_005.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\the_item_in_question.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="items\active_items\example_active\" />
+    <Folder Include="Resources\active_item_sprites\" />
     <Folder Include="Resources\sprites\ProjectileCollection\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
