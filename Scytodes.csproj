@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="custom_class_data\HelpfulMethods.cs" />
     <Compile Include="items\guns\example_gun\TheGunInQuestion.cs" />
     <Compile Include="items\passive_items\example_passive\TheItemInQuestion.cs" />
     <Compile Include="ScytodesSynergies.cs" />
@@ -244,6 +245,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\Sounds\gen-gungeon-audio-bank.py" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />

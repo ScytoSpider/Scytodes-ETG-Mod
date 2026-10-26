@@ -84,6 +84,9 @@ namespace Scytodes
             /* Virtue [EXAMPLE] */
             //NewSynergy(LOLItems.Synergy.EXP_SHARE_FORM_1, "EXP. Share", new[] { VirtueForm1.internalName }, new[] { "macho_brace", "scouter", "life_orb" });
 
+            /* Why Would You Do This? */
+            NewSynergy(Scytodes.Synergy.WHY_WOULD_YOU_DO_THIS, "Why Would You Do This?", new[] { IName(TheGunInQuestion.FullName), "rogue_special" }, null, true);
+
             /* Name Filler */
             //NewSynergy();
 
@@ -180,6 +183,7 @@ namespace Scytodes
     {
         /* Add your synergy names to this list as shown below. */
         SCYTOS_BIAS,
+        WHY_WOULD_YOU_DO_THIS,
         //FILLER_SYNERGY_NAME,
     };
 }

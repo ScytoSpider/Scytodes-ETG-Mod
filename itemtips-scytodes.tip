@@ -19,5 +19,9 @@
       "name": "Scyto's Bias",
       "notes": "WE LIVE BY THE SWORD!! Significantly increases the damage boost from The Item In Question when in possession of the Blasphemy sword."
     },
-  }
+    "#WHY_WOULD_YOU_DO_THIS?": {
+      "name": "Why Would You Do This?",
+      "notes": "I want to know who made this cheap copy of my gun, so I can SHOOT them with it! Decreases the fire rate and damage of The Gun In Question by 30% when in possession of the Rogue Special"
+    },
+  },
 }

@@ -15,19 +15,19 @@ namespace Scytodes.passive_items
 {
     public class TheItemInQuestion : PassiveItem
     {
-        /* Set the name of your item here. */
+        /* Set the name of this item here. */
         public static string ItemName = "The Item In Question";
 
         /* Used for synergy logic in the Update() method.
          * You can safely DELETE or comment this line if you aren't going to have a synergy or want to set up synergies differently. */
         public bool SCYTOSBIASActivated = false;
 
-        /* Call this method from the Start() method of your ETGModule extension (usually called Plugin.cs).
+        /* Call this method from the Start() method of your ETGModule extension (usually called Plugin.cs or Module.cs).
          * If you have the GMStart() method inside your Start() method, call this method from there instead. */
         public static void Init()
         {
             /* Sets the name of this item from the static string ItemName as defined above. */
-        string itemName = ItemName;
+            string itemName = ItemName;
 
             /* This is your item's sprite. If you need help making a sprite, use the following link.
              * https://mtgmodders.gitbook.io/etg-modding-guide/all-things-spriting (I personally use libesprite over aseprite because it's free).
@@ -58,7 +58,7 @@ namespace Scytodes.passive_items
              * <prefix>:<all lowercase item name but spaces are underscores> is also how you define an item for the ItemTips mod. Use the following link for more info on the ItemTips mod.
              * https://thunderstore.io/c/enter-the-gungeon/p/Glorfindel/ItemTips/
              * Note: Your prefix should be the same all across your project! Everywhere you need to input a prefix, use the same exact one.
-             * This class should be set up where you do not need to touch this line. However, if you did not define your prefix in your "Plugin" class, go do that (static string)! Otherwise you will have to modify this line. */
+             * This class should be set up where you do not need to touch this line. However, if you did not define your prefix in your "Plugin"/"Module" class, go do that (static string)! Otherwise you will have to modify this line. */
             ItemBuilder.SetupItem(item, shortDesc, longDesc, $"{Plugin.ModPrefix}");
 
             /* Adds the actual passive effect to this item.
@@ -73,7 +73,7 @@ namespace Scytodes.passive_items
              * Remember that the 'f' after the number marks it as a "float" value. Make sure to include the 'f' as AddPassiveStatModifier takes float values. */
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 4f);
 
-            /* Sets the rarity of this item.
+            /* Sets the quality (rarity) of this item.
              * You cannot have a standard quality AND have special, excluded, or common quality at the same time!
              * However, remember that you MUST have a quality set so make sure to pick either a standard quality or special/excluded/common!
              * Standard qualities include D, C, B, A, and S.
@@ -92,7 +92,7 @@ namespace Scytodes.passive_items
             item.encounterTrackable.journalData.SuppressInAmmonomicon = false;
 
             /* Hides this item from the player's inventory ammonomicon.
-             * Set this line to true if you don't want this item to appear in the player's inventory ammonomicon. */
+             * Set this line to true if you don't want this item to appear in the player's inventory ammonomicon. (I wouldn't recommend doing this for 99% of items).*/
             item.encounterTrackable.SuppressInInventory = false;
 
             /* Sets whether this item increases the player's hidden magnificence stat when picking up this item FROM an A tier chest.
@@ -120,17 +120,17 @@ namespace Scytodes.passive_items
              * ShouldBeExcludedFromShops being set to true only matters for Bello's shop (normal shopkeeper)!
              * Uncomment the related lines for the special shops you want to include this item in. */
             /* Goopton is the one that primarily sells goop\liquid related items. */
-            //itemComponent.AddToSubShop(ItemBuilder.ShopType.Goopton);
+            //item.AddToSubShop(ItemBuilder.ShopType.Goopton);
             /* Flynt is the one that primarily sells key, chest, and mimic related items. */
-            //itemComponent.AddToSubShop(ItemBuilder.ShopType.Flynt);
+            //item.AddToSubShop(ItemBuilder.ShopType.Flynt);
             /* Old Red is the one that primarily sells blank and bullet related items. */
-            //itemComponent.AddToSubShop(ItemBuilder.ShopType.OldRed);
+            //item.AddToSubShop(ItemBuilder.ShopType.OldRed);
             /* Trorc is the one that primarily sells miliary styled/related items. */
-            //itemComponent.AddToSubShop(ItemBuilder.ShopType.Trorc);
+            //item.AddToSubShop(ItemBuilder.ShopType.Trorc);
             /* Cursula is the one that sells cursed items. 
              * Any item bought from her gives an additional 2.5 curse on top of the default curse of the item, even if it doesn't give curse normally.
              * If you steal from Cursula, however, it only adds 1 curse on top since stealing (from any shop) always gives 1 curse, and it bypasses the "purchasing" of the item. */
-            //itemComponent.AddToSubShop(ItemBuilder.ShopType.Cursula);
+            //item.AddToSubShop(ItemBuilder.ShopType.Cursula);
 
             /* Lets this item have a custom buy price. */
             item.UsesCustomCost = false;

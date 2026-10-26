@@ -1,13 +1,15 @@
-﻿using BepInEx;
-using Alexandria;
+﻿using Alexandria;
 using Alexandria.ItemAPI;
+using Alexandria.SoundAPI;
+using BepInEx;
+using Scytodes.guns;
+using Scytodes.passive_items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using UnityEngine;
-using Scytodes.passive_items;
-using Scytodes.guns;
 
 namespace Scytodes
 {
@@ -36,6 +38,9 @@ namespace Scytodes
 
         public void GMStart(GameManager g)
         {
+            ETGMod.Assets.SetupSpritesFromAssembly(Assembly.GetExecutingAssembly(), "Scytodes/Resources/sprites");
+            SoundManager.LoadSoundbanksFromAssembly();
+
             /* Initialize all your passive items here. */
             #region PassiveItems
             TheItemInQuestion.Init();
