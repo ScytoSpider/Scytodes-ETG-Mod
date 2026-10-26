@@ -259,6 +259,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <Content Include="Resources\Sounds\README.txt" />
     <EmbeddedResource Include="Resources\sprites\Ammonomicon Encounter Icon Collection\theguninquestion_idle_001.png" />
     <EmbeddedResource Include="Resources\sprites\WeaponCollection\theguninquestion_fire_001.png" />
     <EmbeddedResource Include="Resources\sprites\WeaponCollection\theguninquestion_fire_002.png" />

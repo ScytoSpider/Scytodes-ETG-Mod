@@ -1,0 +1,4 @@
+When adding a new ".wav" sound file to this folder, you need to regenerate the ".bnk" file using the "gen-gungeon-audio-bank.py" python script. You need python to run this script so download it from the following link: https://www.python.org/downloads/
+If you do not have the script, reference the following page to download it: https://mtgmodders.gitbook.io/etg-modding-guide/sounds/using-custom-sounds
+
+Once you have your new ".bnk" file, you need to add it to your project in visual studio. You do this by clicking include in project on it if it isn't already included, then change it's "Build Action" to "Embedded Resource" to have including in your mod's ".dll" file. Lastly, rebuild your project and your new custom sound should be all set up.
