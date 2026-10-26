@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/Resources/Sounds/gen-gungeon-audio-bank.py
