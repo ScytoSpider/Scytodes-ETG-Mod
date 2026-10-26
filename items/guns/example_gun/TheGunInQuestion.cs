@@ -21,11 +21,11 @@ namespace Scytodes.guns
     {
         /* The ID stored by the game for this gun. Can be used by other functions to call this gun. */
         public static int ID;
+
         /* The ID of whatever gun you want to use as a base for this gun.
          * This must be an int. Setting BaseID to 86 for example would use the Marine Sidearm as a base.
          * To find IDs for guns, use the following link.
          * https://mtgmodders.gitbook.io/etg-modding-guide/various-lists-of-ids-sounds-etc./list-of-item-and-gun-ids */
-
         public static int BaseID = 89;
         /* The ID of whatever gun's projectile you want to use as a base for this gun's projectiles.
          * This must be an int. Setting BaseProjectileID to 86 for example would use the Marine Sidearm's projectiles as a base.
