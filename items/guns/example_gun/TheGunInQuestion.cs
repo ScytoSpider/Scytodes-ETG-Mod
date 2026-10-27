@@ -77,9 +77,9 @@ namespace Scytodes.guns
          * Note: You don't need to put mutliple sfx into this list. Having one sfx will just play that sfx like normal. */
         private static List<string> normalFiringSFXList = new List<string>
         {
+            //theguninquestion_shoot_sfx_01 [EXAMPLE],
+            //theguninquestion_shoot_sfx_02 [EXAMPLE],
             "Play_WPN_plasmarifle_shot_01",
-            //theguninquestion_shoot_sfx_01,
-            //theguninquestion_shoot_sfx_02,
         };
 
         /* Put the exact names of your gun reloading sfx into this List<>. 
@@ -91,9 +91,9 @@ namespace Scytodes.guns
          * Note: You don't need to put mutliple sfx into this list. Having one sfx will just play that sfx like normal. */
         private static List<string> normalReloadingSFXList = new List<string>
         {
-            "Play_WPN_dl45heavylaser_reload",
             //theguninquestion_shoot_sfx_01 [EXAMPLE],
             //theguninquestion_shoot_sfx_02 [EXAMPLE],
+            "Play_WPN_dl45heavylaser_reload",
         };
 
         /* Used for synergy logic in the Update() method.
