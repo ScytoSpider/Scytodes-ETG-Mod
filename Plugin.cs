@@ -4,6 +4,7 @@ using Alexandria.SoundAPI;
 using BepInEx;
 using Scytodes.guns;
 using Scytodes.passive_items;
+using Scytodes.active_items;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,7 @@ namespace Scytodes
 
             /* Initialize all your active items here. */
             #region ActiveItems
+            TheActiveInQuestion.Init();
             //FillerName.Init();
             #endregion
 

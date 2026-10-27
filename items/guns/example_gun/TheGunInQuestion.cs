@@ -294,17 +294,18 @@ namespace Scytodes.guns
 
             /* Lets this gun have a custom buy price. */
             gun.UsesCustomCost = false;
-            /* This is ignored if UsesCustomCost is false. */
+            /* This is ignored if UsesCustomCost is false. 
+             * This price is still affected by floor price modifiers. */
             gun.CustomCost = 22;
-
-            /* Sets whether this gun can be dropped or not */
-            gun.CanBeDropped = true;
 
             /* Adds curse to the player when buying/picking up this item.
              * The last parameter in this line defines the amount of curse the player receives.
              * Set the last parameter to 0f if you do not want this item to give you curse.
              * Remember that the 'f' after the number marks it as a "float" value. Make sure to include the 'f' as AddPassiveStatModifier takes float values. */
             ItemBuilder.AddPassiveStatModifier(gun, PlayerStats.StatType.Curse, 0f);
+
+            /* Sets whether this gun can be dropped or not. */
+            gun.CanBeDropped = true;
 
             /* If you have multiple projectiles, this line determines in what order they are fired.
              * Setting this to Random makes them fire in a random order regardless of the order they were added to your projectile module. 

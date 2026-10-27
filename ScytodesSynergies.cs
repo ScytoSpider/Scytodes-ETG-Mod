@@ -1,5 +1,6 @@
 ﻿using Alexandria.ItemAPI;
 using Scytodes.passive_items;
+using Scytodes.active_items;
 using Scytodes.guns;
 using System;
 using System.Collections.Generic;
@@ -73,6 +74,9 @@ namespace Scytodes
 
             /* Refillable Potion [EXAMPLE] */
             //NewSynergy(LOLItems.Synergy.COCKTAIL_POTION, "Cocktail Potion", new[] { IName(RefillablePotion.ItemName) }, new[] { "potion_of_lead_skin", "potion_of_gun_friendship" });
+
+            /* Pain Killer */
+            NewSynergy(Scytodes.Synergy.PAIN_KILLER, "Pain Killer", new[] { IName(TheActiveInQuestion.ItemName), "cursed_bullets" }, null, true);
 
             /* Name Filler */
             //NewSynergy();
@@ -183,6 +187,7 @@ namespace Scytodes
     {
         /* Add your synergy names to this list as shown below. */
         SCYTOS_BIAS,
+        PAIN_KILLER,
         WHY_WOULD_YOU_DO_THIS,
         //FILLER_SYNERGY_NAME,
     };

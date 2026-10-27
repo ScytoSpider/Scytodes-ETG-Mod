@@ -67,12 +67,6 @@ namespace Scytodes.passive_items
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Coolness, 5);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.1f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 
-            /* Adds curse to the player when buying/picking up this item.
-             * The last parameter in this line defines the amount of curse the player receives.
-             * Set the last parameter to 0f if you do not want this item to give you curse.
-             * Remember that the 'f' after the number marks it as a "float" value. Make sure to include the 'f' as AddPassiveStatModifier takes float values. */
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 4f);
-
             /* Sets the quality (rarity) of this item.
              * You cannot have a standard quality AND have special, excluded, or common quality at the same time!
              * However, remember that you MUST have a quality set so make sure to pick either a standard quality or special/excluded/common!
@@ -134,10 +128,17 @@ namespace Scytodes.passive_items
 
             /* Lets this item have a custom buy price. */
             item.UsesCustomCost = false;
-            /* This is ignored if UsesCustomCost is false. */
+            /* This is ignored if UsesCustomCost is false. 
+             * This price is still affected by floor price modifiers. */
             item.CustomCost = 58;
 
-            /* Sets whether this item can be dropped or not */
+            /* Adds curse to the player when buying/picking up this item.
+             * The last parameter in this line defines the amount of curse the player receives.
+             * Set the last parameter to 0f if you do not want this item to give you curse.
+             * Remember that the 'f' after the number marks it as a "float" value. Make sure to include the 'f' as AddPassiveStatModifier takes float values. */
+            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 0f);
+
+            /* Sets whether this item can be dropped or not. */
             item.CanBeDropped = true;
         }
 
