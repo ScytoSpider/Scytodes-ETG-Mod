@@ -38,7 +38,9 @@ namespace Scytodes
 
         public void GMStart(GameManager g)
         {
+            /* Lets you compile your gun sprites into your mod's ".dll" file, and not have to include them with your mod's COMPILED code. */
             ETGMod.Assets.SetupSpritesFromAssembly(Assembly.GetExecutingAssembly(), "Scytodes/Resources/sprites");
+            /* Lets you use custom sfx files for your guns. */
             SoundManager.LoadSoundbanksFromAssembly();
 
             /* Initialize all your passive items here. */

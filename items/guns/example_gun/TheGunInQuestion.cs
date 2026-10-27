@@ -15,6 +15,11 @@ using UnityEngine;
  * ALSO MASSIVE THANKS TO REALMSXMYTHS & CAPTAIN PRETZEL IN THE SAME DISCORD SERVER
  * https://discord.gg/Ne9yh5Krsh */
 
+/* !!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!
+ * THIS GUN EXAMPLE DOES NOT INCLUDE THE CODE TO MAKE A CHARGED OR BEAM GUN! YOU WILL HAVE TO ADD THE RESPECTIVE CODE YOURSELF!
+ * ALSO, THIS GUN EXAMPLE DOES NOT INCLUDE THE CODE FOR MULTIPLE PROJECTILES WHICH INCLUDES MAKING A SEPARATE PROJECTILE FOR THE END OF YOUR MAG/CLIP!
+ * !!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!! */
+
 namespace Scytodes.guns
 {
     internal class TheGunInQuestion : AdvancedGunBehavior
@@ -37,7 +42,11 @@ namespace Scytodes.guns
         public static int MuzzleFlashID = 89;
         /* The ID of whatever gun's firing and reload sfx you want to use for this gun.
          * This must be an int. Setting SoundEffectsID to 86 for example would use the Marine Sidearm's firing and reload sounds.
-         * The ID of a gun's sfx is referenced by the ID of the gun it's attached to. They do not have a unique ID separate from their original gun (unless you are setting them by name of the sfx file). */
+         * The ID of a gun's sfx is referenced by the ID of the gun it's attached to. They do not have a unique ID separate from their original gun (unless you are setting them by name of the sfx file).
+         * If you want to use custom sfx, separate shooting/reloading sfx, or want to play a random sfx each shot, use normalFiringSFXList (List<>) and normalReloadingSFXList (List<>) instead.
+         * If you want to use custom sfx, make sure that you insert the following code into the Start() method of your ETGModule extension (usually called Plugin.cs or Module.cs).
+         * SoundManager.LoadSoundbanksFromAssembly();
+         * If you have the GMStart() method inside your Start() method, call the above code from there instead. */
         public static int SoundEffectsID = 89;
 
         /* Set the name of this gun here. */
@@ -46,6 +55,9 @@ namespace Scytodes.guns
          * All sprites for this gun must begin with the EXACT same string as this prefix.
          * Example: "theguninquestion_idle_001", "theguninquestion_fire_001", "theguninquestion_reload_001"
          * Note: All sprites for your guns must be placed within specifically named folders in your COMPILED mod folder, NOT your decompiled project folder!
+         * If you want to ONLY place your sprites in your DECOMPILED project folder and compile them with your mods ".dll" file, insert the following code into the Start() method of your ETGModule extension (usually called Plugin.cs or Module.cs).
+         * ETGMod.Assets.SetupSpritesFromAssembly(Assembly.GetExecutingAssembly(), "<your mod's project folder name>/Resources/sprites");
+         * If you have the GMStart() method inside your Start() method, call the above code from there instead.
          * For help regarding setting up these folders, use the following link.
          * https://mtgmodders.gitbook.io/etg-modding-guide/making-a-gun/making-the-gun/setting-up-gun-sprite-folders (your gun sprites should go into the "WeaponCollection" folder)
          * Alternatively, you can head to the following github page and analyze the file structure there.
@@ -61,6 +73,7 @@ namespace Scytodes.guns
          * This still accepts vanilla sfx, just has less limitations (and imo looks more pleasant).
          * To find the exact names of vanilla sfx, use the following link.
          * https://mtgmodders.gitbook.io/etg-modding-guide/sounds/sound-list
+         * If you want to use this, make sure where you call AddCustomSwitchData() for your firing sound has null as its last parameter.
          * Note: You don't need to put mutliple sfx into this list. Having one sfx will just play that sfx like normal. */
         private static List<string> normalFiringSFXList = new List<string>
         {
@@ -74,12 +87,14 @@ namespace Scytodes.guns
          * This still accepts vanilla sfx, just has less limitations (and imo looks more pleasant).
          * To find the exact names of vanilla sfx, use the following link.
          * https://mtgmodders.gitbook.io/etg-modding-guide/sounds/sound-list
+         * If you want to use this, make sure where you cal AddCustomSwitchData() for your reloading sound has null as its last parameter.
          * Note: You don't need to put mutliple sfx into this list. Having one sfx will just play that sfx like normal. */
         private static List<string> normalReloadingSFXList = new List<string>
         {
             "Play_WPN_dl45heavylaser_reload",
-            //theguninquestion_shoot_sfx_01,
-            //theguninquestion_shoot_sfx_02,
+            "Play_WPN_zapper_reload_01",
+            //theguninquestion_shoot_sfx_01 [EXAMPLE],
+            //theguninquestion_shoot_sfx_02 [EXAMPLE],
         };
 
         /* Used for synergy logic in the Update() method.
@@ -178,7 +193,8 @@ namespace Scytodes.guns
              * NoHanded means the gun should not swing or aim at all, like the Crown of Guns which sits on the player's head. */
             gun.gunHandedness = GunHandedness.AutoDetect;
 
-            /* Offset when holding this gun vertically. */
+            /* Offset when holding this gun vertically. 
+             * You can usually leave these as is (I think). */
             gun.carryPixelOffset += new IntVector2(0, 0);
             /* Offset when aiming down. */
             gun.carryPixelDownOffset += new IntVector2(0, 0);
@@ -186,25 +202,37 @@ namespace Scytodes.guns
             gun.carryPixelUpOffset += new IntVector2(0, 0);
 
             /* Sets the the length and width away on the sprite where the barrel should end.
-             * This is where the muzzle flash and projectile will appear. */
+             * This is where the muzzle flash and projectile will appear. 
+             * I forget why it's important but divding by 16f helps when figuring out your offset (I think). */
             gun.barrelOffset.localPosition = new Vector3(16 / 16f, 9 / 16f, 0f);
 
-            /* Sets the firing and reload sounds of this gun to the firing and reloading sounds of a different one. Otherwise, use a custom gunSwitchGroup name then assign your sound effects manually. */
+            /* Sets the firing and reload sounds of this gun to the firing and reloading sounds of a different one. */
             //gun.gunSwitchGroup = (PickupObjectDatabase.GetById(soundEffectsID) as Gun).gunSwitchGroup;
-            /* !!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!
-             * OR YOU CAN SET UP YOUR FIRING/RELOAD SFX USING THE LINES BELOW! DO NOT USE BOTH THE ABOVE LINE AND BELOW LINES FOR SFX! 
-             * !!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!! */
+            /* !!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!
+             * OR YOU CAN SET UP YOUR FIRING/RELOAD SFX USING THE LINES BELOW! DO NOT USE BOTH THE ABOVE LINE AND BELOW LINES FOR SFX!
+             * MORE INFO ON WHICH TO USE CAN BE FOUND AT THE TOP OF THIS CLASS IN THE COMMENTS FOR soundEffectsID, normalFiringSFXList, AND normalReloadingSFXList!
+             * !!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!!--!! */
             /* Sets the unique name for this gun's sound group. In this line, it uses your console name but with an underscore (_) instead of a colon (:).
              * To find the exact names of default sound files, use the following link.
              * https://mtgmodders.gitbook.io/etg-modding-guide/various-lists-of-ids-sounds-etc./sound-list
              *This class should be set up where you do not need to touch this line. However, if you did not define your prefix in your "Plugin"/"Module" class, go do that (static string)! Otherwise you will have to modify this line. */
             gun.gunSwitchGroup = $"{Plugin.ModPrefix}_{fullName.ToID()}";
             /* "Play_WPN_Gun_Shot_01" is this gun's base firing sound.
-             * The last parameter in this line determines the new firing sound. Set this to null to use a custom sound (USING CUSTOM SOUNDS REQUIRES MORE SETUP). */
+             * The last parameter in this line determines the new firing sound. Set this to null to use a custom sound (USING CUSTOM SOUNDS REQUIRES MORE SETUP).
+             * If you are using the normalFiringSFXList (List<>), you do not need to touch this line (as long as the last parameter is null). */
             SoundManager.AddCustomSwitchData("WPN_Guns", gun.gunSwitchGroup, "Play_WPN_Gun_Shot_01", null);
             /* "Play_WPN_Gun_Reload_01" is this gun's base reload sound.
-             * The last parameter in this line determines the new reload sound. Set this to null to use a custom sound (USING CUSTOM SOUNDS REQUIRES MORE SETUP). */
+             * The last parameter in this line determines the new reload sound. Set this to null to use a custom sound (USING CUSTOM SOUNDS REQUIRES MORE SETUP). 
+             * If you are using the normalRelodingSFXList (List<>), you do not need to touch this line (as long as the last parameter is null). */
             SoundManager.AddCustomSwitchData("WPN_Guns", gun.gunSwitchGroup, "Play_WPN_Gun_Reload_01", null);
+
+            /* Sets the class of this gun.
+             * When the player picks up a gun of a specific class, it reduces the drop rate of finding other guns belonging to the same class by 50%.
+             * The SHITTY class is an exception to this as it reduces the chance of finding other SHITTY class guns by 90% instead of 50%.
+             * Gun clases include BEAM, CHARGE, CHARM, EXPLOSIVE, FIRE, FULLAUTO, ICE, NONE, PISTOL, POISON, RIFLE, SHITTY, SHOTGUN, and SILLY.
+             * Because a gun in the NONE class has no assigned category, it does not benefit from class-specific stat boosts or item synergies that require a certain type of weapon to activate.
+             * Guns in the NONE class include the gunslinger's "Slinger", Kruller Glaive, and Chamber Gun. */
+            gun.gunClass = GunClass.SHITTY;
 
             /* Sets the quality (rarity) of this gun.
              * You cannot have a standard quality AND have special, excluded, or common quality at the same time!
@@ -273,25 +301,74 @@ namespace Scytodes.guns
             /* Sets whether this gun can be dropped or not */
             gun.CanBeDropped = true;
 
-            gun.DefaultModule.ammoCost = 1;
-            gun.DefaultModule.angleVariance = 20f;
-            gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
+            /* Adds curse to the player when buying/picking up this item.
+             * The last parameter in this line defines the amount of curse the player receives.
+             * Set the last parameter to 0f if you do not want this item to give you curse.
+             * Remember that the 'f' after the number marks it as a "float" value. Make sure to include the 'f' as AddPassiveStatModifier takes float values. */
+            ItemBuilder.AddPassiveStatModifier(gun, PlayerStats.StatType.Curse, 0f);
+
+            /* If you have multiple projectiles, this line determines in what order they are fired.
+             * Setting this to Random makes them fire in a random order regardless of the order they were added to your projectile module. 
+             * Setting this to Ordered makes them fire in the order they were added to your projectile module. 
+             * Idk what setting it to OrderedGroups does...
+             * Usually, you can just set this to Random. */
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
-            gun.reloadTime = 1.2f;
-            gun.DefaultModule.cooldownTime = 0.3f;
+            /* Set the way your gun fires. 
+             * Firing groups include Automatic, SemiAutomatic, Charged, Beam, and Burst. */
+            gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
+            /* Set how much ammo is consumed for one projectile. Usually this is set to 1. */
+            gun.DefaultModule.ammoCost = 1;
+            /* Set how much ammo your gun has in one mag/clip. */
             gun.DefaultModule.numberOfShotsInClip = 8;
+            /* Set the number of shots per burst if this gun shoots in bursts.
+             * You can safely DELETE or "comment out" this line if you do not want this gun to shoot in bursts. */
+            //gun.DefaultModule.burstShotCount = 3;
+            /* Set the time between shots during a burst.
+             * This is NOT the same as cooldownTime. 
+             * You can safely DELETE or "comment out" this line if you do not want this gun to shoot in bursts. */
+            //gun.DefaultModule.burstCooldownTime = 0.1f; //Time in between shots during a burst.
+            /* Set the time between shots in seconds before the player can fire this gun again. */
+            gun.DefaultModule.cooldownTime = 0.3f;
+            /* Gives a gun infinite ammo. By default, inifinite ammo guns can't crack walls leading to secret rooms. */
+            gun.InfiniteAmmo = true;
+            /* Set the max ammo you can carry for this gun (NOT your mag size). 
+             * Ignored if InfiniteAmmo is set to true. */
             gun.SetBaseMaxAmmo(250);
-            gun.InfiniteAmmo = true; //Gives a gun infinite ammo. By default infinite ammo guns can't crack walls leading to secret rooms.
-            gun.CanGainAmmo = false; //Prevents a gun from being able to pick up ammo boxes.
-            //gun.preventRotation = true; //Prevents the gun from rotating with aim direction -> will always face directly right or left.
-            //gun.CanReloadNoMatterAmmo = true; //Allows a gun to trigger reload events if it has a full clip or zero ammo.
-            //gun.GainsRateOfFireAsContinueAttack = true; //Makes gun shoot faster the longer fire is held (e.g., Vulcan Cannon).
-            //gun.RateOfFireMultiplierAdditionPerSecond = rampUpFactor; //Used in conjunction with GainsRateOfFireAsContinueAttack.
-            //gun.Volley.ModulesAreTiers = true; //Treats each individual volley of a gun as a tier that can be selected using gun.CurrentStrengthTier
+            /* Set the "accuracy" of your gun.
+             * 0f is perfectly accurate, while higher values increases the spread of this gun's projectiles. */
+            gun.DefaultModule.angleVariance = 20f;
+            /* Set the time it takes to reload this gun in seconds. */
+            gun.reloadTime = 1.2f;
+            /* Set whether this gun can use ammo boxes. */
+            gun.CanGainAmmo = false;
+            /* Set whether this gun will rotate with your aim direction. It will always face directly left or right. 
+             * Usually, you can set this to false. */
+            gun.preventRotation = false;
+            /* Set whether this gun can trigger reload events if it no matter how much ammo it has.
+             * You can safely DELETE or "comment out" this line if you want to use the default provided by this gun's base. */
+            //gun.CanReloadNoMatterAmmo = false;
+            /* Set whether this gun shoots faster the longer fire is held (like Vulcan Cannon). */
+            gun.GainsRateOfFireAsContinueAttack = false;
+            /* Set the factor which this gun should multiply its rate of fire. 
+             * This line is ignored if GainsRateOfFireAsContinueAttack is set to false. */
+            gun.RateOfFireMultiplierAdditionPerSecond = 2.2f;
+
+            /* Set how much the gun shakes the screen when fired. 
+             * Set this line to 0f if you do not want the screen to shake at all when firing this gun.
+             * Alternatively, you can safely DELETE or "comment out" this line if you want to use the default provided by this gun's base. */
+            //gun.gunScreenShake.magnitude = 0.8f;
+
+            /* Sets the visual for this gun's ammo clip.
+             * If you need help with how to change this, use the following link.
+             * https://mtgmodders.gitbook.io/etg-modding-guide/making-a-gun/gun-ammo-types
+             * You can safely DELETE or "comment out" this line if you want to use the default provided by this gun's base. */
             //gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            /* Sets the customAmmoType for this gun's ammo clip visual.
+             * This is ignored if this gun's ammoType is not CUSTOM.
+             * You can safely DELETE or "comment out" this line if you want to use the default provided by this gun's base. */
             //gun.DefaultModule.customAmmoType = "mega";
 
-            /* This block of code helps clone our projectile. Basically it makes it so things like Shadow Clone and Hip Holster keep the stats/sprite of your custom gun's projectiles. */
+            /* This line of code helps clone our projectile. Basically, it makes it so things like Shadow Clone and Hip Holster keep the stats/sprite of this gun's projectiles. */
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
 
             /* For these impact sound effects, the file names have to start with "Play_WPN" + "yourSoundFileName" + "_impact_01". */
@@ -304,15 +381,31 @@ namespace Scytodes.guns
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
 
-            //You can modify a good number of stats but for now, let's just modify the damage and speed.
+            /* Set the damage of this gun's projectiles. */
             projectile.baseData.damage = 4f;
+            /* Set the speed of this gun's projectiles. */
             projectile.baseData.speed = 18f;
+            /* Set the range of this gun's projectiles. */
             projectile.baseData.range = 10f;
+            /* Set this knockback force of this gun's projectiles. */
             projectile.baseData.force = 4f;
+            /* Set whether this gun's projectiles should rotate depending on the direction the player is aiming. */
+            projectile.shouldRotate = true;
+            /* Set the scale of this gun's projectiles.
+             * Usually, you can just set this to 1f. */
+            projectile.AdditionalScaleMultiplier = 1f;
+            /* This line makes sure your bullet spawns on this gun's barrel. */
             projectile.transform.parent = gun.barrelOffset;
-            //This determines what sprite you want your projectile to use. Note this isn't necessary if you don't want to have a custom projectile sprite.
-            //The x and y values determine the size of your custom projectile
-            //projectile.SetProjectileSpriteRight("build_projectile", x, y, null, null);
+
+            /* Set a custom Projectile Sprite if you don't want to use this gun's default.
+             * The first parameter in this line is the sprite name in sprites\ProjectileCollection.
+             * tk2dBaseSprite.Anchor.MiddleCenter controls where the sprite is anchored. MiddleCenter will work in most cases.
+             * The first set of numbers is the visual dimensions of the sprite while the last set of numbers is the hitbox.  Generally the hitbox should be a little smaller than the visuals.
+             * Note: your sprite will stretch to match the visual dimensions.
+             * You can safely DELETE or "comment out" this line if you do not want to use the default provided by this gun's base. */
+            projectile.SetProjectileSpriteRight("shockSMG_projectile_001", 16, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 14, 5);
+
+            /* Adds this gun to the list of items in-game. */
             ETGMod.Databases.Items.Add(gun, null, "ANY");
 
             ID = gun.PickupObjectId;
