@@ -166,7 +166,7 @@ namespace Scytodes.active_items
 
             /* Sets whether this item can be dropped or not.
              * Since this is an active item, it can be swapped out for another active item REGARDLESS if this line is set to false or not.
-             * When swapped out with CanBeDropped set to false, this item will simply disappear from existence instead of dropping to the floor like a normal item.
+             * When swapped out with CanBeDropped set to false, this item will simply drop to the floor like a normal item.
              * For an active, it is generally not recommended to set this to false. 
              * You can safely DELETE or "comment out" this line unless you're going to mess with this which again, IS NOT RECOMMENDED! */
             //item.CanBeDropped = true;
