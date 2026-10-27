@@ -188,7 +188,8 @@ namespace Scytodes.active_items
             {
                 return false;
             }
-            return true;
+
+            return user.healthHaver.GetCurrentHealthPercentage() < 1.0f;
         }
 
         /* This method determines what this active item actually does when the player uses it.
