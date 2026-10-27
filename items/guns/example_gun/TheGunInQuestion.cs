@@ -92,7 +92,6 @@ namespace Scytodes.guns
         private static List<string> normalReloadingSFXList = new List<string>
         {
             "Play_WPN_dl45heavylaser_reload",
-            "Play_WPN_zapper_reload_01",
             //theguninquestion_shoot_sfx_01 [EXAMPLE],
             //theguninquestion_shoot_sfx_02 [EXAMPLE],
         };
@@ -402,8 +401,8 @@ namespace Scytodes.guns
              * tk2dBaseSprite.Anchor.MiddleCenter controls where the sprite is anchored. MiddleCenter will work in most cases.
              * The first set of numbers is the visual dimensions of the sprite while the last set of numbers is the hitbox.  Generally the hitbox should be a little smaller than the visuals.
              * Note: your sprite will stretch to match the visual dimensions.
-             * You can safely DELETE or "comment out" this line if you do not want to use the default provided by this gun's base. */
-            projectile.SetProjectileSpriteRight("shockSMG_projectile_001", 16, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 14, 5);
+             * You can safely DELETE or "comment out" this line if you want to use the default provided by this gun's base. */
+            //projectile.SetProjectileSpriteRight("theguninquestion_projectile_001", 16, 7, true, tk2dBaseSprite.Anchor.MiddleCenter, 14, 5);
 
             /* Adds this gun to the list of items in-game. */
             ETGMod.Databases.Items.Add(gun, null, "ANY");
