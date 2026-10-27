@@ -206,7 +206,6 @@ namespace Scytodes.active_items
                 {
                     user.healthHaver.ApplyHealing(0.5f);
                     AkSoundEngine.PostEvent("Play_OBJ_med_kit_01", base.gameObject);
-                    user.PlayEffectOnActor((GameObject)ResourceCache.Acquire("Global VFX/VFX_Heal_Sparkles"), Vector3.zero, true, false, false);
                 }
                 else
                 {
