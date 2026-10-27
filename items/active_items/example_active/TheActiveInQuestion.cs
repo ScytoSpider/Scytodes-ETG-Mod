@@ -176,37 +176,46 @@ namespace Scytodes.active_items
             //Plugin.Log($"Player picked up {DisplayName}.");
         }
 
-        /* filler. */
+        /* This method determines whether this active item can be used. If this method doesn't return true, the player is NOT able to use it in-game until it returns true.
+         * My synergy logic is in this method, you may have to change or remove my code depending on what you want this item to do. */
         public override bool CanBeUsed(PlayerController user)
         {
-            if (user.HasSynergy(Synergy.PAIN_KILLER) && user.healthHaver.GetCurrentHealth() > 1.0f)
+            if (user.HasSynergy(Synergy.PAIN_KILLER) && user.healthHaver.GetCurrentHealth() > 0.5f)
             {
                 return true;
             }
-            else if (user.HasSynergy(Synergy.PAIN_KILLER) && user.healthHaver.GetCurrentHealth() <= 1.0f)
+            else if (user.HasSynergy(Synergy.PAIN_KILLER) && user.healthHaver.GetCurrentHealth() <= 0.5f)
             {
                 return false;
             }
-            return user.healthHaver.GetCurrentHealth() > 0.5f;
+            return true;
         }
 
-        /* filler. */
+        /* This method determines what this active item actually does when the player uses it.
+         * My synergy logic is in this method, you may have to change or remove my code depending on what you want this item to do. */
         public override void DoEffect(PlayerController user)
         {
             if (CanBeUsed(user))
             {
                 if (!user.HasSynergy(Synergy.PAIN_KILLER))
                 {
+                    Vector2 dir = new Vector2(0, 0);
                     user.healthHaver.ApplyHealing(0.5f);
                 }
 
                 if (user.HasSynergy(Synergy.PAIN_KILLER))
                 {
-                    user.healthHaver.ApplyHealing(-0.5f);
+                    Vector2 dir = new Vector2(0, 0);
+                    user.healthHaver.ApplyDamage(0.5f, dir, itemName, CoreDamageTypes.None, DamageCategory.Unstoppable, true);
+                    /* Adds temporary 2 curse to the player to spawn the curse fx. */
                     ItemBuilder.AddPassiveStatModifier(this, PlayerStats.StatType.Curse, 2f);
+                    /* Removes the temporary curse. */
                     ItemBuilder.RemovePassiveStatModifier(this, PlayerStats.StatType.Curse);
+                    /* Adds permanent 2 curse to the player that will stay even after dropping this item. */
                     user.stats.SetBaseStatValue(PlayerStats.StatType.Curse, user.stats.GetBaseStatValue(PlayerStats.StatType.Curse) + 2f, user);
                     user.stats.RecalculateStatsWithoutRebuildingGunVolleys(user);
+
+                    /* Log's the player's current curse stat for debugging. This should be commented out when not actively debugging this item. */
                     Plugin.Log($"Player's current curse: {user.stats.GetBaseStatValue(PlayerStats.StatType.Curse)}");
                 }
             }

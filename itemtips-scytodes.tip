@@ -29,7 +29,7 @@
     },
     "#PAIN_KILLER": {
       "name": "Pain Killer",
-      "notes": "Who needs health anyway when you can kill enemies faster? Damages the player for half a heart and adds 2 curse when using The Active In Question. This replaces its the usual healing."
+      "notes": "Who needs health anyway when you can kill enemies faster? Damages the player for half a heart and adds 2 curse when using The Active In Question. This replaces its usual healing."
     },
   },
 }
