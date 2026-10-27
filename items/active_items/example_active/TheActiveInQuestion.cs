@@ -27,6 +27,10 @@ namespace Scytodes.active_items
         /* Set the name of this item here. */
         public static string ItemName = "The Active In Question";
 
+        /* Used for adding permanent curse in the DoEffect() method.
+         * You can safely DELETE or comment this line if you aren't going to have permanent curse or want to set up applied curse differently. */
+        private static StatModifier ownerlessCurseModifier = StatModifier.Create(PlayerStats.StatType.Curse, StatModifier.ModifyMethod.ADDITIVE, 2f);
+
         /* Call this method from the Start() method of your ETGModule extension (usually called Plugin.cs or Module.cs).
          * If you have the GMStart() method inside your Start() method, call this method from there instead. */
         public static void Init()
@@ -200,24 +204,21 @@ namespace Scytodes.active_items
             {
                 if (!user.HasSynergy(Synergy.PAIN_KILLER))
                 {
-                    Vector2 dir = new Vector2(0, 0);
                     user.healthHaver.ApplyHealing(0.5f);
+                    AkSoundEngine.PostEvent("Play_OBJ_med_kit_01", base.gameObject);
                 }
 
                 if (user.HasSynergy(Synergy.PAIN_KILLER))
                 {
                     Vector2 dir = new Vector2(0, 0);
                     user.healthHaver.ApplyDamage(0.5f, dir, itemName, CoreDamageTypes.None, DamageCategory.Unstoppable, true);
-                    /* Adds temporary 2 curse to the player to spawn the curse fx. */
-                    ItemBuilder.AddPassiveStatModifier(this, PlayerStats.StatType.Curse, 2f);
-                    /* Removes the temporary curse. */
-                    ItemBuilder.RemovePassiveStatModifier(this, PlayerStats.StatType.Curse);
+
                     /* Adds permanent 2 curse to the player that will stay even after dropping this item. */
-                    user.stats.SetBaseStatValue(PlayerStats.StatType.Curse, user.stats.GetBaseStatValue(PlayerStats.StatType.Curse) + 2f, user);
+                    user.ownerlessStatModifiers.Add(ownerlessCurseModifier);
                     user.stats.RecalculateStatsWithoutRebuildingGunVolleys(user);
 
                     /* Log's the player's current curse stat for debugging. This should be commented out when not actively debugging this item. */
-                    Plugin.Log($"Player's current curse: {user.stats.GetBaseStatValue(PlayerStats.StatType.Curse)}");
+                    Plugin.Log($"Player's current curse: {user.stats.GetStatValue(PlayerStats.StatType.Curse)}");
                 }
             }
         }
