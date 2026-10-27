@@ -207,8 +207,7 @@ namespace Scytodes.active_items
                     user.healthHaver.ApplyHealing(0.5f);
                     AkSoundEngine.PostEvent("Play_OBJ_med_kit_01", base.gameObject);
                 }
-
-                if (user.HasSynergy(Synergy.PAIN_KILLER))
+                else
                 {
                     Vector2 dir = new Vector2(0, 0);
                     user.healthHaver.ApplyDamage(0.5f, dir, itemName, CoreDamageTypes.None, DamageCategory.Unstoppable, true);
