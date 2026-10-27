@@ -217,7 +217,7 @@ namespace Scytodes.active_items
                     user.stats.RecalculateStatsWithoutRebuildingGunVolleys(user);
 
                     /* Log's the player's current curse stat for debugging. This should be commented out when not actively debugging this item. */
-                    Plugin.Log($"Player's current curse: {user.stats.GetStatValue(PlayerStats.StatType.Curse)}");
+                    //Plugin.Log($"Player's current curse: {user.stats.GetStatValue(PlayerStats.StatType.Curse)}");
                 }
             }
         }
