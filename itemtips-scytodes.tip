@@ -5,15 +5,15 @@
     "url": ""
   },
   "items": {
-    "Scytodes:the_item_in_question": {
+    "scy:the_item_in_question": {
       "name": "The Item In Question",
       "notes": "This is a test passive item."
     },
-    "Scytodes:the_active_in_question": {
+    "scy:the_active_in_question": {
       "name": "The Active In Question",
       "notes": "This is a test active item."
     },
-    "Scytodes:the_gun_in_question": {
+    "scy:the_gun_in_question": {
       "name": "The Gun In Question",
       "notes": "This is a test gun."
     },

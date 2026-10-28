@@ -11,6 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
+using System.Web;
 
 namespace Scytodes
 {
@@ -30,7 +31,7 @@ namespace Scytodes
          * https://thunderstore.io/c/enter-the-gungeon/p/Glorfindel/ItemTips/
          * Note: Your prefix should be the same all across your project! Everywhere you need to input a prefix, use the same exact one.
          * However, this should be the only line in your project that you are defining your prefix, to reduce the chance of errors. */
-        public static string ModPrefix = "Scytodes";
+        public static string ModPrefix = "scy";
 
         public void Start()
         {
@@ -53,6 +54,7 @@ namespace Scytodes
             /* Initialize all your active items here. */
             #region ActiveItems
             TheActiveInQuestion.Init();
+            APieceOfHome.Init();
             //FillerName.Init();
             #endregion
 
