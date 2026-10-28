@@ -10,7 +10,7 @@ using System.Text;
 
 /* CODE TAKEN FROM THE FOLLOWING GITHUB LINK
  * https://github.com/Ricky2148/ETG-Mod-League-of-Legends-Items/blob/main/Synergies.cs
- * MASSIVE THANKS TO RICKY2148 IN THE "Mod The Gungeon" DISCORD SERVER 
+ * MASSIVE THANKS TO RICKY2148 IN THE "Mod The Gungeon" DISCORD SERVER
  * ALSO MASSIVE THANKS TO REALMSXMYTHS & CAPTAIN PRETZEL IN THE SAME DISCORD SERVER
  * https://discord.gg/Ne9yh5Krsh */
 

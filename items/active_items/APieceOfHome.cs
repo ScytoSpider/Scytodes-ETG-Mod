@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-/* MASSIVE THANKS TO RICKY2148 IN THE "Mod The Gungeon" DISCORD SERVER 
+/* MASSIVE THANKS TO RICKY2148 IN THE "Mod The Gungeon" DISCORD SERVER
  * ALSO MASSIVE THANKS TO REALMSXMYTHS & CAPTAIN PRETZEL IN THE SAME DISCORD SERVER
  * https://discord.gg/Ne9yh5Krsh */
 
@@ -54,8 +54,8 @@ namespace Scytodes.active_items
             /* Ammonomicon entry variables.
              * shortDesc should be one sentence max. Usually only one or a few words.
              * longDesc is your entire item description. Describe exactly what your item does and include flavor text at the top or bottom if you want. */
-            string shortDesc = "Filler Text.";
-            string longDesc = "Filler Text.\n" + "Filler Text.\n\n" + "Filler Text.";
+            string shortDesc = "Anywhere you go";
+            string longDesc = "The pearlescent scale of an aquatic beast. \n" + "Enables Sairyn to call upon her ancestry to lure enemies towards her.\n\n" + "It's a little piece of home.";
 
             /* Adds this item to the gungeon item list, ammonomicon, loot table, etc.
              * This line should always come AFTER ItemBuilder.AddSpriteToObject()!
@@ -187,7 +187,10 @@ namespace Scytodes.active_items
             return true;
         }
 
-        /* This method determines what this active item actually does when the player uses it. */
+        /* This method determines what this active item actually does when the player uses it.
+         * MASSIVE THANK YOU TO CAPTAIN PRETZEL IN THE "Mod The Gungeon" DISCORD SERVER!
+         * HE WROTE THIS CODE! I DON'T UNDERSTAND IT ONE BIT BUT IT WORKS EXACTLY HOW I WANTED IT TO!
+         * https://discord.gg/Ne9yh5Krsh */
         public override void DoEffect(PlayerController user)
         {
             if (!CanBeUsed(user)) { return; }
@@ -200,97 +203,8 @@ namespace Scytodes.active_items
 
             foreach (AIActor enemy in enemies)
             {
-                if (enemy == null || enemy.behaviorSpeculator == null) { continue; }
-                if (enemy.healthHaver.IsBoss || enemy.healthHaver.IsSubboss) { continue; }
-
-                BehaviorSpeculator bs = enemy.behaviorSpeculator;
-
-                // Save original behavior lists and attack group.
-                List<MovementBehaviorBase> originalMovement = new List<MovementBehaviorBase>(bs.MovementBehaviors);
-                List<TargetBehaviorBase> originalTargets = new List<TargetBehaviorBase>(bs.TargetBehaviors);
-                List<AttackBehaviorBase> originalAttacks = new List<AttackBehaviorBase>(bs.AttackBehaviors);
-
-                // Remove fleeing and wandering behaviors.
-                bs.MovementBehaviors.RemoveAll(behavior =>
-                    behavior is FleeTargetBehavior ||
-                    behavior is MoveErraticallyBehavior);
-
-                // Remove existing SeekTargetBehavior instances so they
-                // don't compete with the follow behavior.
-                bs.MovementBehaviors.RemoveAll(behavior =>
-                    behavior is SeekTargetBehavior);
-
-                // Configure pursuit using Gungeon's follow behavior.
-                AIAnimator animator = enemy.aiAnimator;
-
-                CompanionFollowPlayerBehavior follow = new CompanionFollowPlayerBehavior();
-                follow.CanRollOverPits = false;
-                follow.DisableInCombat = false;
-                follow.CatchUpRadius = 1f;
-                follow.CatchUpAccelTime = 0.25f;
-                follow.TemporarilyDisabled = false;
-
-                if (animator != null && animator.MoveAnimation != null)
-                {
-                    string moveAnimation = animator.MoveAnimation.Prefix;
-                    follow.CatchUpAnimation = moveAnimation;
-                    follow.CatchUpOutAnimation = moveAnimation;
-                    follow.RollAnimation = moveAnimation;
-                }
-
-                bs.MovementBehaviors.Add(follow);
-
-                // Make the player the target.
-                bs.TargetBehaviors.RemoveAll(behavior =>
-                    behavior is TargetPlayerBehavior);
-
-                bs.TargetBehaviors.Add(new TargetPlayerBehavior
-                {
-                    Radius = 1000f,
-                    LineOfSight = false,
-                    ObjectPermanence = true,
-                    SearchInterval = 0.1f,
-                    PauseOnTargetSwitch = false
-                });
-
-                // Temporarily prevent attacks.
-                bs.AttackBehaviors = new List<AttackBehaviorBase>();
-
-                bs.enabled = true;
-                bs.RefreshBehaviors();
-
-                // Restore the enemy after 3 seconds.
-                GameManager.Instance.StartCoroutine(
-                    RestoreEnemy(
-                        enemy,
-                        originalMovement,
-                        originalTargets,
-                        originalAttacks,
-                        3f
-                    )
-                );
+                enemy.StartCoroutine(ForceMoveTowardsTargetBehavior.ForceFollowPlayer(enemy, user, 3.5f));
             }
         }
-
-        private IEnumerator RestoreEnemy(
-            AIActor enemy,
-            List<MovementBehaviorBase> originalMovement,
-            List<TargetBehaviorBase> originalTargets,
-            List<AttackBehaviorBase> originalAttacks,
-            float duration)
-        {
-            yield return new WaitForSeconds(duration);
-
-            if (enemy == null || enemy.behaviorSpeculator == null) { yield break; }
-
-            BehaviorSpeculator bs = enemy.behaviorSpeculator;
-
-            bs.MovementBehaviors = originalMovement;
-            bs.TargetBehaviors = originalTargets;
-            bs.AttackBehaviors = originalAttacks;
-
-            bs.RefreshBehaviors();
-        }
-
     }
 }

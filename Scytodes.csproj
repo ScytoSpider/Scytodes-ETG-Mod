@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="custom_class_data\ForceFollowPlayer.cs" />
     <Compile Include="custom_class_data\HelpfulMethods.cs" />
     <Compile Include="items\active_items\example_active\TheActiveInQuestion.cs" />
     <Compile Include="items\active_items\APieceOfHome.cs" />

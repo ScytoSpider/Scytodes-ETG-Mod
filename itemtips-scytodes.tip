@@ -17,6 +17,10 @@
       "name": "The Gun In Question",
       "notes": "This is a test gun."
     },
+    "scy:a_piece_of_home": {
+      "name": "A Piece Of Home",
+      "notes": "Anywhere you go"
+    },
   },
   "synergies": {
     "#SCYTO'S_BIAS": {
