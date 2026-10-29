@@ -190,6 +190,9 @@ namespace Scytodes.active_items
         /* This method determines whether this active item can be used. If this method doesn't return true, the player is NOT able to use it in-game until it returns true. */
         public override bool CanBeUsed(PlayerController user)
         {
+            bool isBossRoom = false;
+            bool hasWhitelistEnemies = false;
+
             RoomHandler room = user.CurrentRoom;
             if (room == null) { return false; }
 
@@ -198,7 +201,23 @@ namespace Scytodes.active_items
 
             foreach (AIActor enemy in enemies)
             {
-                if (enemy.healthHaver.IsBoss == true || enemy.healthHaver.IsSubboss) { return false; }
+                if (enemy.healthHaver.IsBoss == true || enemy.healthHaver.IsSubboss == true)
+                {
+                    isBossRoom = true;
+                    return false;
+                }
+                else
+                {
+                    if (!ForceMoveTowardsTargetBehavior.BannedEnemies.Contains(enemy.EnemyGuid) && !isBossRoom && enemy.behaviorSpeculator is not BehaviorSpeculator bs)
+                    {
+                        hasWhitelistEnemies = true;
+                        return true;
+                    }
+                    else if (!hasWhitelistEnemies)
+                    {
+                        return false;
+                    }
+                }
             }
 
             return true;

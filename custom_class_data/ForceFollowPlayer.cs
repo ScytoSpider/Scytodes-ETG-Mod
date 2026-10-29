@@ -20,7 +20,7 @@ public class ForceMoveTowardsTargetBehavior : OverrideBehaviorBase
     public float DesiredDistance = 500f;
     public bool CanAttackWhileMoving = false;
 
-    internal static readonly List<string> BannedEnemies = [
+    public static readonly List<string> BannedEnemies = [
         EnemyGUIDs.Mountain_Cube_GUID,
         EnemyGUIDs.Lead_Cube_GUID,
         EnemyGUIDs.Flesh_Cube_GUID,
@@ -35,6 +35,30 @@ public class ForceMoveTowardsTargetBehavior : OverrideBehaviorBase
         EnemyGUIDs.Horizontal_X_Det_GUID,
         EnemyGUIDs.Lead_Maiden_GUID,
         EnemyGUIDs.Fridge_Lead_Maiden_GUID,
+        EnemyGUIDs.AIActor_Lord_Of_The_Jammed_GUID,
+        EnemyGUIDs.Ser_Junkan_GUID,
+        EnemyGUIDs.Baby_Good_Shelleton_Companion_GUID,
+        EnemyGUIDs.Blank_Companion_GUID,
+        EnemyGUIDs.Chicken_Companion_GUID,
+        EnemyGUIDs.Phoenix_Companion_GUID,
+        EnemyGUIDs.Blank_Companion_Synergy_Forme_GUID,
+        EnemyGUIDs.Super_Space_Turtle_GUID,
+        EnemyGUIDs.Dog_GUID,
+        EnemyGUIDs.Cop_GUID,
+        EnemyGUIDs.Wolf_GUID,
+        EnemyGUIDs.Harmless_Snake_GUID,
+        EnemyGUIDs.Pig_Cannon_Synergy_Forme_GUID,
+        EnemyGUIDs.Dog_Puppy_Synergy_GUID,
+        EnemyGUIDs.Wolf_Puppy_Synergy_GUID,
+        EnemyGUIDs.Android_Cop_GUID,
+        EnemyGUIDs.Raccoon_GUID,
+        EnemyGUIDs.Turtle_GUID,
+        EnemyGUIDs.Turkey_GUID,
+        EnemyGUIDs.Paday_Shooter_1_GUID,
+        EnemyGUIDs.Paday_Shooter_2_GUID,
+        EnemyGUIDs.Paday_Shooter_3_GUID,
+        EnemyGUIDs.Baby_Good_Mimic_GUID,
+
     ];
 
     private float m_repathTimer;
