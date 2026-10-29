@@ -218,7 +218,7 @@ namespace Scytodes.active_items
             foreach (AIActor enemy in enemies)
             {
                 /* Plays a random sfx from your normalUseSFXList(List<>). */
-                HelpfulMethods.PlayRandomSFX(user.gameObject, normalUseSFXList);
+                HelpfulMethods.PlayRandomSFX(this.gameObject, normalUseSFXList);
                 enemy.StartCoroutine(ForceMoveTowardsTargetBehavior.ForceFollowPlayer(enemy, user, 4.25f));
             }
         }
