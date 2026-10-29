@@ -33,6 +33,8 @@ public class ForceMoveTowardsTargetBehavior : OverrideBehaviorBase
         EnemyGUIDs.Horizontal_Det_GUID,
         EnemyGUIDs.Vertical_X_Det_GUID,
         EnemyGUIDs.Horizontal_X_Det_GUID,
+        EnemyGUIDs.Lead_Maiden_GUID,
+        EnemyGUIDs.Fridge_Lead_Maiden_GUID,
     ];
 
     private float m_repathTimer;

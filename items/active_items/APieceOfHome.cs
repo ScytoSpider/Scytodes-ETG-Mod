@@ -28,6 +28,15 @@ namespace Scytodes.active_items
         /* Set the name of this item here. */
         public static string ItemName = "A Piece Of Home";
 
+        /* Put the exact names of your active's on-use sfx into this List<>. 
+         * To find the exact names of vanilla sfx, use the following link.
+         * https://mtgmodders.gitbook.io/etg-modding-guide/sounds/sound-list
+         * Note: You don't need to put mutliple sfx into this list. Having one sfx will just play that sfx like normal. */
+        private static List<string> normalUseSFXList = new List<string>
+        {
+            "siren_allure_SFX",
+        };
+
         /* Call this method from the Start() method of your ETGModule extension (usually called Plugin.cs or Module.cs).
          * If you have the GMStart() method inside your Start() method, call this method from there instead. */
         public static void Init()
@@ -208,7 +217,9 @@ namespace Scytodes.active_items
 
             foreach (AIActor enemy in enemies)
             {
-                enemy.StartCoroutine(ForceMoveTowardsTargetBehavior.ForceFollowPlayer(enemy, user, 3.6f));
+                /* Plays a random sfx from your normalUseSFXList(List<>). */
+                HelpfulMethods.PlayRandomSFX(user.gameObject, normalUseSFXList);
+                enemy.StartCoroutine(ForceMoveTowardsTargetBehavior.ForceFollowPlayer(enemy, user, 4.25f));
             }
         }
     }
