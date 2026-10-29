@@ -259,8 +259,8 @@
     <EmbeddedResource Include="Resources\sprites\WeaponCollection\theguninquestion_idle_004.jtk2d" />
     <EmbeddedResource Include="Resources\sprites\WeaponCollection\theguninquestion_idle_005.jtk2d" />
     <EmbeddedResource Include="Resources\sprites\WeaponCollection\theguninquestion_reload_001.jtk2d" />
-    <Content Include="Resources\Sounds\Scytodes.bnk" />
-    <Content Include="Resources\Sounds\Scytodes.csv" />
+    <EmbeddedResource Include="Resources\Sounds\Scytodes.bnk" />
+    <EmbeddedResource Include="Resources\Sounds\Scytodes.csv" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
