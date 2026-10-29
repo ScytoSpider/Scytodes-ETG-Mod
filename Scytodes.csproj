@@ -248,7 +248,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <EmbeddedResource Include="Resources\Sounds\siren_allure_SFX.wav" />
     <EmbeddedResource Include="Resources\sprites\WeaponCollection\theguninquestion_fire_001.jtk2d" />
     <EmbeddedResource Include="Resources\sprites\WeaponCollection\theguninquestion_fire_002.jtk2d" />
     <EmbeddedResource Include="Resources\sprites\WeaponCollection\theguninquestion_fire_003.jtk2d" />
@@ -264,6 +263,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <EmbeddedResource Include="Resources\Sounds\siren_allure_SFX_01.wav" />
+    <EmbeddedResource Include="Resources\Sounds\siren_allure_SFX_02.wav" />
+    <EmbeddedResource Include="Resources\Sounds\siren_allure_SFX_03.wav" />
+    <EmbeddedResource Include="Resources\Sounds\siren_allure_SFX_04.wav" />
     <EmbeddedResource Include="Resources\passive_item_sprites\the_item_in_question.png" />
     <EmbeddedResource Include="Resources\active_item_sprites\the_active_in_question.png" />
     <EmbeddedResource Include="Resources\active_item_sprites\a_piece_of_home.png" />

@@ -34,7 +34,10 @@ namespace Scytodes.active_items
          * Note: You don't need to put mutliple sfx into this list. Having one sfx will just play that sfx like normal. */
         private static List<string> normalUseSFXList = new List<string>
         {
-            "siren_allure_SFX",
+            "siren_allure_SFX_01",
+            "siren_allure_SFX_02",
+            "siren_allure_SFX_03",
+            "siren_allure_SFX_04",
         };
 
         /* Call this method from the Start() method of your ETGModule extension (usually called Plugin.cs or Module.cs).
