@@ -1,3 +1,4 @@
+using Alexandria;
 using Alexandria.ItemAPI;
 using Alexandria.Misc;
 using Dungeonator;
@@ -15,89 +16,98 @@ using UnityEngine;
 
 public class ForceMoveTowardsTargetBehavior : OverrideBehaviorBase
 {
-  public float PathInterval = 0.25f;
-  public float DesiredDistance = 200f;
-  public bool CanAttackWhileMoving = false;
+    public float PathInterval = 0.25f;
+    public float DesiredDistance = 500f;
+    public bool CanAttackWhileMoving = false;
 
-  private float m_repathTimer;
-  private IntVector2? m_targetPos;
-  private IntVector2 m_cachedPlayerCell;
+    internal static readonly List<string> BannedEnemies = [
+        EnemyGUIDs.Mountain_Cube_GUID,
+        EnemyGUIDs.Lead_Cube_GUID,
+        EnemyGUIDs.Flesh_Cube_GUID,
+        EnemyGUIDs.Agonizer_GUID,
+        EnemyGUIDs.Det_GUID,
+        EnemyGUIDs.X_Det_GUID,
+        EnemyGUIDs.Diagonal_X_Det_GUID,
+        EnemyGUIDs.Vertical_Det_GUID,
+        EnemyGUIDs.Diagonal_Det_GUID,
+        EnemyGUIDs.Horizontal_Det_GUID,
+        EnemyGUIDs.Vertical_X_Det_GUID,
+        EnemyGUIDs.Horizontal_X_Det_GUID,
+    ];
 
-  public override void Upkeep()
-  {
-    base.Upkeep();
-    DecrementTimer(ref m_repathTimer);
-  }
+    private float m_repathTimer;
+    private IntVector2? m_targetPos;
+    private IntVector2 m_cachedPlayerCell;
 
-  public override bool OverrideOtherBehaviors()
-  {
-    return true;
-  }
-
-  public override BehaviorResult Update()
-  {
-    if (!m_targetPos.HasValue && m_repathTimer > 0f)
-      return BehaviorResult.Continue;
-    if (m_aiActor.TargetRigidbody)
-      m_targetPos = m_aiActor.TargetRigidbody.UnitCenter.ToIntVector2(VectorConversions.Floor);
-    else
-      m_targetPos = null;
-    if (!m_targetPos.HasValue)
-      return BehaviorResult.Continue;
-    if (m_repathTimer <= 0f)
+    public override void Upkeep()
     {
-      if (m_targetPos.HasValue && m_aiActor.TargetRigidbody)
-      {
-        m_repathTimer = PathInterval;
-        m_cachedPlayerCell = m_aiActor.TargetRigidbody.UnitCenter.ToIntVector2(VectorConversions.Floor);
-        m_aiActor.PathfindToPosition(m_targetPos.Value.ToCenterVector2(), null, true, null, overridePathableTiles: (CellTypes.FLOOR | CellTypes.PIT));
-      }
+        base.Upkeep();
+        DecrementTimer(ref m_repathTimer);
     }
-    if (!m_targetPos.HasValue)
-      return BehaviorResult.Continue;
-    return CanAttackWhileMoving ? BehaviorResult.SkipRemainingClassBehaviors : BehaviorResult.SkipAllRemainingBehaviors;
-  }
 
-  private bool CellValidator(IntVector2 c)
-  {
-    for (int i = 0; i < m_aiActor.Clearance.x; i++)
-      for (int j = 0; j < m_aiActor.Clearance.y; j++)
-        if (GameManager.Instance.Dungeon.data.isTopWall(c.x + i, c.y + j))
-          return false;
-    return true;
-  }
+    public override bool OverrideOtherBehaviors()
+    {
+        return true;
+    }
 
-  public static IEnumerator ForceFollowPlayer(AIActor actor, PlayerController playerTarget, float timeToFollowPlayer)
-  {
-    if (!actor || !playerTarget || timeToFollowPlayer <= 0)
-      yield break; // nothing to do
-    if (actor.behaviorSpeculator is not BehaviorSpeculator bs)
-      yield break; // no behaviors to override
-    if (actor.healthHaver is not HealthHaver hh || hh.IsBoss || hh.IsSubboss)
-      yield break; // don't target bosses or minibosses
+    public override BehaviorResult Update()
+    {
+        if (!m_targetPos.HasValue && m_repathTimer > 0f) { return BehaviorResult.Continue; }
+        if (m_aiActor.TargetRigidbody) { m_targetPos = m_aiActor.TargetRigidbody.UnitCenter.ToIntVector2(VectorConversions.Floor); }
+        else { m_targetPos = null; }
+        if (!m_targetPos.HasValue) { return BehaviorResult.Continue; }
+        if (m_repathTimer <= 0f)
+        {
+            if (m_targetPos.HasValue && m_aiActor.TargetRigidbody)
+            {
+                m_repathTimer = PathInterval;
+                m_cachedPlayerCell = m_aiActor.TargetRigidbody.UnitCenter.ToIntVector2(VectorConversions.Floor);
+                m_aiActor.PathfindToPosition(m_targetPos.Value.ToCenterVector2(), null, true, null, overridePathableTiles: (CellTypes.FLOOR | CellTypes.PIT));
+            }
+        }
+        if (!m_targetPos.HasValue) { return BehaviorResult.Continue; }
+        return CanAttackWhileMoving ? BehaviorResult.SkipRemainingClassBehaviors : BehaviorResult.SkipAllRemainingBehaviors;
+    }
 
-    // remember who we were tracking before
-    SpeculativeRigidbody oldOverrideTarget = actor.OverrideTarget;
-    actor.OverrideTarget = playerTarget.specRigidbody;
+    private bool CellValidator(IntVector2 c)
+    {
+        for (int i = 0; i < m_aiActor.Clearance.x; i++)
+        {
+            for (int j = 0; j < m_aiActor.Clearance.y; j++)
+            {
+                if (GameManager.Instance.Dungeon.data.isTopWall(c.x + i, c.y + j)) { return false; }
+            }
+        }
+        return true;
+    }
 
-    // set up the new override to forcibly track the player
-    ForceMoveTowardsTargetBehavior forceMovement = new ForceMoveTowardsTargetBehavior();
-    bs.OverrideBehaviors.Add(forceMovement);
-    bs.RefreshBehaviors();
+    public static IEnumerator ForceFollowPlayer(AIActor actor, PlayerController playerTarget, float timeToFollowPlayer)
+    {
+        if (!actor || !playerTarget || timeToFollowPlayer <= 0) { yield break; } // nothing to do
+        if (actor.behaviorSpeculator is not BehaviorSpeculator bs) { yield break; } // no behaviors to override
+        if (actor.healthHaver is not HealthHaver hh1 || hh1.IsBoss || hh1.IsSubboss) { yield break; } // don't target bosses or minibosses
+        if (actor is not AIActor enemy || BannedEnemies.Contains(enemy.EnemyGuid)) { yield break; } // don't target blacklisted enemies
 
-    // wait
-    yield return new WaitForSeconds(timeToFollowPlayer);
+        // remember who we were tracking before
+        SpeculativeRigidbody oldOverrideTarget = actor.OverrideTarget;
+        actor.OverrideTarget = playerTarget.specRigidbody;
 
-    // restore our old target and remove the override behavior
-    if (oldOverrideTarget)
-      actor.OverrideTarget = oldOverrideTarget;
-    else
-      actor.OverrideTarget = null;
-    bs.OverrideBehaviors.Remove(forceMovement);
-    bs.RefreshBehaviors();
+        // set up the new override to forcibly track the player
+        ForceMoveTowardsTargetBehavior forceMovement = new ForceMoveTowardsTargetBehavior();
+        bs.OverrideBehaviors.Add(forceMovement);
+        bs.RefreshBehaviors();
 
-    // done
-    yield break;
-  }
+        // wait
+        yield return new WaitForSeconds(timeToFollowPlayer);
+
+        // restore our old target and remove the override behavior
+        if (oldOverrideTarget) { actor.OverrideTarget = oldOverrideTarget; }
+        else { actor.OverrideTarget = null; }
+        bs.OverrideBehaviors.Remove(forceMovement);
+        bs.RefreshBehaviors();
+
+        // done
+        yield break;
+    }
 }
 

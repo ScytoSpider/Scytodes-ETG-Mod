@@ -19,7 +19,7 @@
     },
     "scy:a_piece_of_home": {
       "name": "A Piece Of Home",
-      "notes": "Anywhere you go"
+      "notes": "Forces most enemies, which are able to walk, to walk towards you for 3.6 seconds. Affected enemies will not attempt to harm you during this time. Cannot be used in boss rooms or miniboss rooms. Goes on a 33s cooldown."
     },
   },
   "synergies": {

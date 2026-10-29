@@ -55,7 +55,7 @@ namespace Scytodes.active_items
              * shortDesc should be one sentence max. Usually only one or a few words.
              * longDesc is your entire item description. Describe exactly what your item does and include flavor text at the top or bottom if you want. */
             string shortDesc = "Anywhere you go";
-            string longDesc = "The pearlescent scale of an aquatic beast.  Adds an extra active item slot.\n" + "Enables Sairyn to call upon her ancestry to lure enemies towards her.\n\n" + "It's a little piece of home.";
+            string longDesc = "The pearlescent scale of an aquatic beast. Grants an extra active item slot.\n" + "Enables Sairyn to call upon her ancestry to allure enemies toward her for a short time. Those affected may experience reduced spatial awareness... This strains her voice though, so she has to take breaks in-between uses.\n\n" + "It's a little piece of home.";
 
             /* Adds this item to the gungeon item list, ammonomicon, loot table, etc.
              * This line should always come AFTER ItemBuilder.AddSpriteToObject()!
@@ -78,7 +78,7 @@ namespace Scytodes.active_items
              * Timed recharges active items based on how much time has passed in seconds since last use.
              * PerRoom recharges active items based on how many rooms the player has cleared since last use.
              * None is used for active items which can be reused instantly, have multiple charges before disappearing, or have special conditions for recharging. */
-            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 24f);
+            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 33f);
 
             /* Set whether this item is one-time consumable or not.
              * Instead of recharging, this item is destroyed upon use.
@@ -184,6 +184,11 @@ namespace Scytodes.active_items
             List<AIActor> enemies = room.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
             if (enemies == null) { return false; }
 
+            foreach (AIActor enemy in enemies)
+            {
+                if (enemy.healthHaver.IsBoss == true || enemy.healthHaver.IsSubboss) { return false; }
+            }
+
             return true;
         }
 
@@ -203,7 +208,7 @@ namespace Scytodes.active_items
 
             foreach (AIActor enemy in enemies)
             {
-                enemy.StartCoroutine(ForceMoveTowardsTargetBehavior.ForceFollowPlayer(enemy, user, 3.5f));
+                enemy.StartCoroutine(ForceMoveTowardsTargetBehavior.ForceFollowPlayer(enemy, user, 3.6f));
             }
         }
     }
