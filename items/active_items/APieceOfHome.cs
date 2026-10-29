@@ -208,7 +208,7 @@ namespace Scytodes.active_items
                 }
                 else
                 {
-                    if (!ForceMoveTowardsTargetBehavior.BannedEnemies.Contains(enemy.EnemyGuid) && !isBossRoom && enemy.behaviorSpeculator is not BehaviorSpeculator bs)
+                    if (!ForceMoveTowardsTargetBehavior.BannedEnemies.Contains(enemy.EnemyGuid) && !isBossRoom)
                     {
                         hasWhitelistEnemies = true;
                         return true;

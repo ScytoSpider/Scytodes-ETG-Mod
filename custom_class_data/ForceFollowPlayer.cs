@@ -58,7 +58,6 @@ public class ForceMoveTowardsTargetBehavior : OverrideBehaviorBase
         EnemyGUIDs.Paday_Shooter_2_GUID,
         EnemyGUIDs.Paday_Shooter_3_GUID,
         EnemyGUIDs.Baby_Good_Mimic_GUID,
-
     ];
 
     private float m_repathTimer;
