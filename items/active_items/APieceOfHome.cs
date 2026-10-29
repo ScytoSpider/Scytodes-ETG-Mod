@@ -190,37 +190,29 @@ namespace Scytodes.active_items
         /* This method determines whether this active item can be used. If this method doesn't return true, the player is NOT able to use it in-game until it returns true. */
         public override bool CanBeUsed(PlayerController user)
         {
-            bool isBossRoom = false;
-            bool hasWhitelistEnemies = false;
-
             RoomHandler room = user.CurrentRoom;
             if (room == null) { return false; }
 
             List<AIActor> enemies = room.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
-            if (enemies == null) { return false; }
+            if (enemies == null || enemies.Count == 0) { return false; }
+
+            bool hasEligibleEnemy = false;
 
             foreach (AIActor enemy in enemies)
             {
-                if (enemy.healthHaver.IsBoss == true || enemy.healthHaver.IsSubboss == true)
+                if (enemy == null || enemy.healthHaver == null) { continue; }
+
+                /* Never allow use in a room containing a boss or subboss. */
+                if (enemy.healthHaver.IsBoss || enemy.healthHaver.IsSubboss) { return false; }
+
+                /* At least one enemy must not be banned. */
+                if (!ForceMoveTowardsTargetBehavior.BannedEnemies.Contains(enemy.EnemyGuid))
                 {
-                    isBossRoom = true;
-                    return false;
-                }
-                else
-                {
-                    if (!ForceMoveTowardsTargetBehavior.BannedEnemies.Contains(enemy.EnemyGuid) && !isBossRoom)
-                    {
-                        hasWhitelistEnemies = true;
-                        return true;
-                    }
-                    else if (!hasWhitelistEnemies)
-                    {
-                        return false;
-                    }
+                    hasEligibleEnemy = true;
                 }
             }
 
-            return true;
+            return hasEligibleEnemy;
         }
 
         /* This method determines what this active item actually does when the player uses it.
