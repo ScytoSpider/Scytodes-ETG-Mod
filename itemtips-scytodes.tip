@@ -19,7 +19,11 @@
     },
     "scy:a_piece_of_home": {
       "name": "A Piece Of Home",
-      "notes": "Forces most enemies, which are able to move, to move towards you for 4.25 seconds. Affected enemies will not attempt to harm you during this time. Cannot be used in boss rooms or miniboss rooms. Goes on a 33s cooldown."
+      "notes": "Forces most enemies, which are able to move, to move towards you for 4.25s. Affected enemies will not attempt to harm you during this time. Cannot be used in boss rooms or miniboss rooms. Goes on a 26s cooldown."
+    },
+    "scy:sairyn's_curse": {
+      "name": "Sairyn's Curse",
+      "notes": "Provides immunity to contact damage. Adds one heart container. Player projectiles that travel farther than 6 units away, decrease in damage and scale until it is 9 units away. The max damage/scale reduction is 20%."
     },
   },
   "synergies": {
@@ -34,6 +38,10 @@
     "#PAIN_KILLER": {
       "name": "Pain Killer",
       "notes": "Who needs health anyway when you can kill enemies faster? Damages the player for half a heart and adds 2 curse when using The Active In Question. This replaces its usual healing."
+    },
+    "#MIGHT_AS_WELL": {
+      "name": "Might as well",
+      "notes": "I should be fighting up close anyways. No point in keeping my distance... Reduces knockback from the player's projectiles by 50%."
     },
   },
 }

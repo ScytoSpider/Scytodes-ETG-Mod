@@ -48,6 +48,7 @@ namespace Scytodes
             /* Initialize all your passive items here. */
             #region PassiveItems
             TheItemInQuestion.Init();
+            SairynsCurse.Init();
             //FillerName.Init();
             #endregion
 

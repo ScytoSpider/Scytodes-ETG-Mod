@@ -65,6 +65,9 @@ namespace Scytodes
             /* Scyto's Bias */
             NewSynergy(Scytodes.Synergy.SCYTOS_BIAS, "Scyto's Bias", new[] { IName(TheItemInQuestion.ItemName), "blasphemy" }, null, true);
 
+            /* Might as well */
+            NewSynergy(Scytodes.Synergy.MIGHT_AS_WELL, "Might as well", new[] { IName(SairynsCurse.ItemName), "stout_bullets" }, null, true);
+
             /* Name Filler */
             //NewSynergy();
 
@@ -189,6 +192,7 @@ namespace Scytodes
         SCYTOS_BIAS,
         PAIN_KILLER,
         WHY_WOULD_YOU_DO_THIS,
+        MIGHT_AS_WELL,
         //FILLER_SYNERGY_NAME,
     };
 }

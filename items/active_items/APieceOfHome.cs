@@ -90,7 +90,7 @@ namespace Scytodes.active_items
              * Timed recharges active items based on how much time has passed in seconds since last use.
              * PerRoom recharges active items based on how many rooms the player has cleared since last use.
              * None is used for active items which can be reused instantly, have multiple charges before disappearing, or have special conditions for recharging. */
-            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 33f);
+            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 26f);
 
             /* Set whether this item is one-time consumable or not.
              * Instead of recharging, this item is destroyed upon use.

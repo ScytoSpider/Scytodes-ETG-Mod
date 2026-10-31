@@ -37,10 +37,12 @@
   <ItemGroup>
     <Compile Include="custom_class_data\ForceFollowPlayer.cs" />
     <Compile Include="custom_class_data\HelpfulMethods.cs" />
+    <Compile Include="custom_class_data\ProjectileDamageFalloff.cs" />
     <Compile Include="items\active_items\example_active\TheActiveInQuestion.cs" />
     <Compile Include="items\active_items\APieceOfHome.cs" />
     <Compile Include="items\guns\example_gun\TheGunInQuestion.cs" />
     <Compile Include="items\passive_items\example_passive\TheItemInQuestion.cs" />
+    <Compile Include="items\passive_items\SairynsCurse.cs" />
     <Compile Include="ScytodesSynergies.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -270,6 +272,7 @@
     <EmbeddedResource Include="Resources\passive_item_sprites\the_item_in_question.png" />
     <EmbeddedResource Include="Resources\active_item_sprites\the_active_in_question.png" />
     <EmbeddedResource Include="Resources\active_item_sprites\a_piece_of_home.png" />
+    <EmbeddedResource Include="Resources\passive_item_sprites\sairyns_curse.png" />
     <Content Include="Resources\Sounds\README.txt" />
     <EmbeddedResource Include="Resources\sprites\Ammonomicon Encounter Icon Collection\theguninquestion_idle_001.png" />
     <EmbeddedResource Include="Resources\sprites\WeaponCollection\theguninquestion_fire_001.png" />
