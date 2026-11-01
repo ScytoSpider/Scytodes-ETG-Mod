@@ -25,7 +25,7 @@ namespace Scytodes
 
         private float dRadius;
 
-        public bool ForceNoDamage;
+        public bool ForceNoDamage = true;
 
         public bool UsesCustomProjectileCallback;
 
