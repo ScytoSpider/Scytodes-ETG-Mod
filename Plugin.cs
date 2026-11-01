@@ -35,7 +35,7 @@ namespace Scytodes
 
         /* The nameShort from your "characterdata.txt" file. */
         /* This is used for enabling f2 console autocompletion when using KCCM. */
-        private static string SairynNameShort = "";
+        private static string SairynNameShort = "Sairyn";
 
         public void Start()
         {

@@ -36,7 +36,11 @@ public class ForceMoveTowardsTargetBehavior : OverrideBehaviorBase
         EnemyGUIDs.Lead_Maiden_GUID,
         EnemyGUIDs.Fridge_Lead_Maiden_GUID,
         EnemyGUIDs.AIActor_Lord_Of_The_Jammed_GUID,
+        EnemyGUIDs.Gat_GUID,
+        EnemyGUIDs.Grip_Master_GUID,
+        EnemyGUIDs.Tarnisher_GUID,
         EnemyGUIDs.Ser_Junkan_GUID,
+        /* These below shouldn't be necessary but are here just in case. */
         EnemyGUIDs.Baby_Good_Shelleton_Companion_GUID,
         EnemyGUIDs.Blank_Companion_GUID,
         EnemyGUIDs.Chicken_Companion_GUID,

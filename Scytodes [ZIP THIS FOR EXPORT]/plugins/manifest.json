@@ -1,0 +1,12 @@
+{
+  "name": "Scytodes",
+  "version_number": "1.0.0",
+  "website_url": "",
+  "description": "Character and item mod made by ScytoSpider.",
+  "dependencies": [
+    "MtG_API-Mod_the_Gungeon_API-1.9.2",
+    "BepInEx-BepInExPack_EtG-5.4.2101",
+    "KyleTheScientist-Custom_Characters_Mod-2.2.8",
+    "Alexandria-Alexandria-0.5.6"
+  ]
+}
