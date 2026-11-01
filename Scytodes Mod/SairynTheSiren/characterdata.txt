@@ -1,0 +1,23 @@
+#Lines in this document starting with hashtags and empty lines are not read by the character loader.
+#They are for commentary and spacing, respectively.
+
+#You HAVE to include these.
+#List of bases: Bullet, Convict, Gunslinger, Hunter, Marine / Soldier, Paradox / Eevee, Pilot / Rogue, Robot.
+base: Pilot
+name: Sairyn
+name short: Sairyn
+nickname: Siren Girl
+
+<loadout>
+rogue_special infinite
+scy:a_piece_of_home
+scy:sairyn's_curse
+
+</loadout>
+
+<stats>
+
+Health: 3
+KnockbackMultiplier: 0.9
+MovementSpeed: 7.5
+</stats>

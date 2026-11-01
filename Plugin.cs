@@ -33,6 +33,10 @@ namespace Scytodes
          * However, this should be the only line in your project that you are defining your prefix, to reduce the chance of errors. */
         public static string ModPrefix = "scy";
 
+        /* The nameShort from your "characterdata.txt" file. */
+        /* This is used for enabling f2 console autocompletion when using KCCM. */
+        private static string SairynNameShort = "";
+
         public void Start()
         {
             ETGModMainBehaviour.WaitForGameManagerStart(GMStart);
@@ -67,6 +71,17 @@ namespace Scytodes
 
             /* Synergies Init (You won't need more than just this line). */
             ScytodesSynergies.Init();
+
+            try
+            {
+                /* This is used for enabling f2 console autocompletion when using KCCM. */
+                ETGModConsole.Characters.Add(SairynNameShort, SairynNameShort);
+            }
+            catch (Exception e)
+            {
+                ETGModConsole.Log(e.Message);
+                ETGModConsole.Log(e.StackTrace);
+            }
 
             Log($"{NAME} v{VERSION} started successfully. If any bugs occur with my mod, contact me at lethal_inc. on discord!", TEXT_COLOR);
         }

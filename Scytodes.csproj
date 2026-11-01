@@ -262,9 +262,13 @@
     <EmbeddedResource Include="Resources\sprites\WeaponCollection\theguninquestion_reload_001.jtk2d" />
     <EmbeddedResource Include="Resources\Sounds\Scytodes.bnk" />
     <EmbeddedResource Include="Resources\Sounds\Scytodes.csv" />
+    <None Include="Scytodes Mod\itemtips-scytodes.tip" />
+    <None Include="Scytodes Mod\manifest.json" />
+    <None Include="Scytodes Mod\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Scytodes Mod\icon.png" />
     <EmbeddedResource Include="Resources\Sounds\siren_allure_SFX_01.wav" />
     <EmbeddedResource Include="Resources\Sounds\siren_allure_SFX_02.wav" />
     <EmbeddedResource Include="Resources\Sounds\siren_allure_SFX_03.wav" />
