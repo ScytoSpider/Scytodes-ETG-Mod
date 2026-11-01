@@ -262,13 +262,18 @@
     <EmbeddedResource Include="Resources\sprites\WeaponCollection\theguninquestion_reload_001.jtk2d" />
     <EmbeddedResource Include="Resources\Sounds\Scytodes.bnk" />
     <EmbeddedResource Include="Resources\Sounds\Scytodes.csv" />
-    <None Include="Scytodes Mod\itemtips-scytodes.tip" />
-    <None Include="Scytodes Mod\manifest.json" />
-    <None Include="Scytodes Mod\README.md" />
+    <None Include="Scytodes [ZIP THIS FOR EXPORT]\plugins\itemtips-scytodes.tip" />
+    <None Include="Scytodes [ZIP THIS FOR EXPORT]\plugins\manifest.json" />
+    <None Include="Scytodes [ZIP THIS FOR EXPORT]\plugins\Prize Pistol Bugfix\CHANGELOG.md" />
+    <None Include="Scytodes [ZIP THIS FOR EXPORT]\plugins\Prize Pistol Bugfix\README.md" />
+    <None Include="Scytodes [ZIP THIS FOR EXPORT]\plugins\README.md" />
+    <None Include="Scytodes [ZIP THIS FOR EXPORT]\plugins\SairynTheSiren\Sairyn-ccremove.spapi" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
-    <None Include="Scytodes Mod\icon.png" />
+    <Content Include="Scytodes [ZIP THIS FOR EXPORT]\plugins\icon.png" />
+    <Content Include="Scytodes [ZIP THIS FOR EXPORT]\plugins\Prize Pistol Bugfix\PPBugfix.dll" />
+    <Content Include="Scytodes [ZIP THIS FOR EXPORT]\plugins\SairynTheSiren\characterdata.txt" />
     <EmbeddedResource Include="Resources\Sounds\siren_allure_SFX_01.wav" />
     <EmbeddedResource Include="Resources\Sounds\siren_allure_SFX_02.wav" />
     <EmbeddedResource Include="Resources\Sounds\siren_allure_SFX_03.wav" />
