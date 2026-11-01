@@ -22,7 +22,7 @@ using UnityEngine;
 
 namespace Scytodes.active_items
 {
-    public class TheActiveInQuestion : PlayerItem
+    public class TheActiveInQuestion : HealPlayerItem
     {
         /* Set the name of this item here. */
         public static string ItemName = "The Active In Question";
@@ -69,6 +69,9 @@ namespace Scytodes.active_items
              * Note: Your prefix should be the same all across your project! Everywhere you need to input a prefix, use the same exact one.
              * This class should be set up where you do not need to touch this line. However, if you did not define your prefix in your "Plugin"/"Module" class, go do that (static string)! Otherwise you will have to modify this line. */
             ItemBuilder.SetupItem(item, shortDesc, longDesc, $"{Plugin.ModPrefix}");
+
+            /* Gets the VFX for healing from the medkit item. */
+            item.healVFX = (PickupObjectDatabase.GetById(63) as HealPlayerItem).healVFX;
 
             /* Adds a passive effect to this item. Though this is an active item so you probably don't want this.
              * Depending on what you want your item to do, you may or may not want to delete this part.
@@ -205,6 +208,10 @@ namespace Scytodes.active_items
                 if (!user.HasSynergy(Synergy.PAIN_KILLER))
                 {
                     user.healthHaver.ApplyHealing(0.5f);
+                    if (healVFX != null)
+                    {
+                        user.PlayEffectOnActor(healVFX, Vector3.zero);
+                    }
                     AkSoundEngine.PostEvent("Play_OBJ_med_kit_01", base.gameObject);
                 }
                 else

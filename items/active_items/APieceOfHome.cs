@@ -40,6 +40,15 @@ namespace Scytodes.active_items
             "siren_allure_SFX_04",
         };
 
+        public GameObject sirenSongVFX;
+
+        public float distortionIntensity = 0.03f;
+        public float distortionRadius = 0.03f;
+        public float pushForce = 0f;
+        public float pushRadius = 0f;
+        public float knockbackForce = 0f;
+        public float knockbackRadius = 0f;
+
         /* Call this method from the Start() method of your ETGModule extension (usually called Plugin.cs or Module.cs).
          * If you have the GMStart() method inside your Start() method, call this method from there instead. */
         public static void Init()
@@ -78,6 +87,9 @@ namespace Scytodes.active_items
              * Note: Your prefix should be the same all across your project! Everywhere you need to input a prefix, use the same exact one.
              * This class should be set up where you do not need to touch this line. However, if you did not define your prefix in your "Plugin"/"Module" class, go do that (static string)! Otherwise you will have to modify this line. */
             ItemBuilder.SetupItem(item, shortDesc, longDesc, $"{Plugin.ModPrefix}");
+
+            /* Gets the VFX for healing from the medkit item. */
+            item.sirenSongVFX = (PickupObjectDatabase.GetById(224) as SilencerItem).silencerVFXPrefab;
 
             /* Adds a passive effect to this item. Though this is an active item so you probably don't want this.
              * Depending on what you want your item to do, you may or may not want to delete this part.
@@ -229,10 +241,14 @@ namespace Scytodes.active_items
             List<AIActor> enemies = room.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
             if (enemies == null) { return; }
 
+            /* Plays a random sfx from your normalUseSFXList(List<>). */
+            HelpfulMethods.PlayRandomSFX(this.gameObject, normalUseSFXList);
+            GameObject gameObject = new GameObject("blankvfxhandler");
+            BlankVFXHandler silencerInstance = gameObject.AddComponent<BlankVFXHandler>();
+            silencerInstance.TriggerSilencer(user.CenterPosition, 200f, 300f, sirenSongVFX, distortionIntensity, distortionRadius, pushForce, pushRadius, knockbackForce, knockbackRadius, 0.4f, user);
+
             foreach (AIActor enemy in enemies)
             {
-                /* Plays a random sfx from your normalUseSFXList(List<>). */
-                HelpfulMethods.PlayRandomSFX(this.gameObject, normalUseSFXList);
                 enemy.StartCoroutine(ForceMoveTowardsTargetBehavior.ForceFollowPlayer(enemy, user, 4.25f));
             }
         }
