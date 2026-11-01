@@ -90,31 +90,6 @@ namespace Scytodes
                 m_distortionMaterial.SetVector("_WaveCenter", centerPointInScreenUV);
                 Pixelator.Instance.RegisterAdditionalRenderPass(m_distortionMaterial);
             }
-            if (maxRadius > 10f)
-            {
-                List<BulletScriptSource> allBulletScriptSources = StaticReferenceManager.AllBulletScriptSources;
-                for (int k = 0; k < allBulletScriptSources.Count; k++)
-                {
-                    BulletScriptSource bulletScriptSource = allBulletScriptSources[k];
-                    if (!bulletScriptSource.IsEnded && bulletScriptSource.RootBullet != null && bulletScriptSource.RootBullet.EndOnBlank)
-                    {
-                        bulletScriptSource.ForceStop();
-                    }
-                }
-                ReadOnlyCollection<Projectile> allProjectiles = StaticReferenceManager.AllProjectiles;
-                for (int num5 = allProjectiles.Count - 1; num5 >= 0; num5--)
-                {
-                    Projectile projectile = allProjectiles[num5];
-                    if ((bool)projectile.braveBulletScript && projectile.braveBulletScript.bullet != null && projectile.braveBulletScript.bullet.EndOnBlank)
-                    {
-                        if (UsesCustomProjectileCallback && OnCustomBlankedProjectile != null)
-                        {
-                            OnCustomBlankedProjectile(projectile);
-                        }
-                        projectile.DieInAir(suppressInAirEffects: false, allowActorSpawns: true, allowProjectileSpawns: true, killedEarly: true);
-                    }
-                }
-            }
             Pixelator.Instance.StartCoroutine(BackupDistortionCleanup());
             StartCoroutine(HandleSilence(centerPoint, expandSpeed, maxRadius, additionalTimeAtMaxRadius, user));
         }
